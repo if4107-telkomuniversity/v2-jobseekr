@@ -11,3 +11,6 @@ Sure! You need to set up few things first.
 4. Run `php artisan key:generate` to create a new `APP_KEY` for your application
 5. **Optional** if you have migration(s), you may run `php artisan migrate`
 6. You're all set!
+
+#### Now what?
+If you're stuck, please just read [Laravel 5.5 Documentation](https://laravel.com/docs/5.5)
