@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Apply Job | JobSeekr</title>
+    <title>Profile | JobSeekr</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
     <link rel="stylesheet" href="css/app.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
@@ -15,7 +15,7 @@
       <div class="columns">
         <div class="column is-4 navbar-left">
           <div class="navbar-brand">
-            <a class="navbar-item" href="?key=r/dashboard">
+            <a class="navbar-item" href="?key=j/dashboard">
               <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
             </a>
 
@@ -44,13 +44,13 @@
               {Username}
             </a>
             <div class="navbar-dropdown">
-              <a class="navbar-item" href="jobseeker-profile.html">
+              <a class="navbar-item" href="?key=j/profile">
                 <span class="icon is-small is-left">
                   <i class="fas fa-user-cog"></i>
                 </span>
                 &nbsp&nbsp Profile
               </a>
-              <a class="navbar-item">
+              <a class="navbar-item" href="?key=j/report-issue">
                 <span class="icon is-small is-left">
                   <i class="fas fa-bug"></i>
                 </span>
@@ -74,7 +74,7 @@
         <div class="column is-2 side-menu">
           <aside class="menu white-background">
             <ul class="menu-list">
-              <li><a href="jobseeker-dashboard.html" class="subtitle is-4">Jobs</a></li>
+              <li><a href="?key=j/dashboard" class="subtitle is-4">Jobs</a></li>
               <li><a class="subtitle is-4">Applications</a></li>
               <li><a class="subtitle is-4">My Documents</a></li>
             </ul>
@@ -96,11 +96,39 @@
                   </figure>
                 </div>
                 <div class="column is-8">
-                  <span class="title is-4 jobseeker-name">{{Name}}</span><br/>
-                  <span class="subtitle is-5 jobseeker-address">{{Address}}</span><br/>
-                  <span class="subtitle is-5 jobseeker-email">{{Email}}</span><br/>
-                  <span class="subtitle is-5 jobseeker-phone-number">{{Phone number}}</span><br/>
-                  <button class="button is-info">&nbsp&nbspEdit&nbsp&nbsp</button>
+                  <span class="title is-4 jobseeker-name">{Name}</span><br/>
+                  <br/>
+                  <form action="#" method="POST">
+                    <div class="columns">
+                      <div class="column is-10">
+                        <div class="field">
+                          <p class="control has-icons-left has-icons-right">
+                            <input class="input" type="text" placeholder="Address">
+                            <span class="icon is-small is-left">
+                              <i class="fas fa-map-marker-alt"></i>
+                            </span>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="columns low-top-margin">
+                      <div class="column is-10">
+                        <div class="field">
+                          <p class="control has-icons-left has-icons-right">
+                            <input class="input" type="text" placeholder="Phone number">
+                            <span class="icon is-small is-left">
+                              <i class="fas fa-phone"></i>
+                            </span>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="columns low-top-margin">
+                      <div class="column">
+                        <button class="button is-info">&nbsp&nbspEdit&nbsp&nbsp</button>
+                      </div>
+                    </div>
+                  </form>
                 </div>
                 <div class="column is-1">
                 </div>
@@ -109,13 +137,52 @@
             <div class="box">
               <div class="columns">
                 <div class="column is-3">
-                  <span class="subtitle is-4">Summary</span>
+                  <span class="subtitle is-4">Accout</span>
                 </div>
                 <div class="column is-8">
-                  <div id="application-summary">
-                    <span class="subtitle is-5 jobseeker-summary" id="summary-content">{{Summary}}</span><br/>
-                  </div>
-                  <button class="button is-info" id="summary-edit-btn" onclick="editApplySummary()">&nbsp&nbspEdit&nbsp&nbsp</button>
+                  <form action="#" method="POST">
+                    <div class="columns">
+                      <div class="column is-10">
+                        <div class="field">
+                          <p class="control has-icons-left has-icons-right is-expanded">
+                            <input class="input" type="email" placeholder="Email">
+                            <span class="icon is-small is-left">
+                              <i class="fas fa-at"></i>
+                            </span>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="columns low-top-margin">
+                      <div class="column is-10">
+                        <div class="field">
+                          <p class="control has-icons-left has-icons-right">
+                            <input class="input" type="password" placeholder="Password">
+                            <span class="icon is-small is-left">
+                              <i class="fas fa-unlock-alt"></i>
+                            </span>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="columns low-top-margin">
+                      <div class="column is-10">
+                        <div class="field">
+                          <p class="control has-icons-left has-icons-right">
+                            <input class="input" type="password" placeholder="Repeat password">
+                            <span class="icon is-small is-left">
+                              <i class="fas fa-unlock-alt"></i>
+                            </span>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="columns low-top-margin">
+                      <div class="column">
+                        <button class="button is-info">&nbsp&nbspEdit&nbsp&nbsp</button>
+                      </div>
+                    </div>
+                  </form>
                 </div>
                 <div class="column is-1">
                 </div>
@@ -151,9 +218,9 @@
                         </figure>
                       </div>
                       <div class="column is-8">
-                        <span class="subtitle is-5">{{work experience.position}}</span><br/>
-                        <span class="subtitle is-5">{{work experience.company}}</span><br/>
-                        <span class="subtitle is-5">{{work experience.duration}}</span><br/>
+                        <span class="subtitle is-5">{work experience.position}</span><br/>
+                        <span class="subtitle is-5">{work experience.company}</span><br/>
+                        <span class="subtitle is-5">{work experience.duration}</span><br/>
                       </div>
                       <div class="column is-1">
                       </div>
@@ -165,13 +232,13 @@
                 </div>
               </div>
             </div>
-            <!-- <div class="box">
+            <div class="box">
               <div class="columns">
                 <div class="column is-3">
                   <span class="subtitle is-4">Document</span>
                 </div>
                 <div class="column is-7">
-                  <span class="subtitle is-5">{{Document.cv.name}}</span><br/>
+                  <span class="subtitle is-5">{Document.cv.name}</span><br/>
                 </div>
                 <div class="column is-1">
                   <button class="button is-info">&nbsp&nbspEdit&nbsp&nbsp</button>
@@ -179,8 +246,7 @@
                 <div class="column is-1">
                 </div>
               </div>
-            </div> -->
-            <button onclick="apply()" class="button is-info is-fullwidth is-medium" type="button"">Apply for job!</button>
+            </div>
           </div>
           <div class="column">
           </div>
@@ -191,10 +257,6 @@
     function callFunctions() {
       checkAuth();
       formatForUser();
-      formatJob();
-      formatCompany();
-      formatCategory();
-      formatIndustry();
     }
   </script>
 </html>

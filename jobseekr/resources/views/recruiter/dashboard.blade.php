@@ -36,7 +36,7 @@
               </a>
 
               <div class="navbar-dropdown">
-                <a class="navbar-item" href="jobseeker-profile.html">
+                <a class="navbar-item" href="?key=j/profile">
                   <span class="icon is-small is-left">
                     <i class="fas fa-user-cog"></i>
                   </span>

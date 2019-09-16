@@ -14,7 +14,7 @@
     <nav class="navbar" role="navigation" aria-label="main navigation">
       <div class="container">
         <div class="navbar-brand">
-          <a class="navbar-item" href="?key=r/dashboard">
+          <a class="navbar-item" href="?key=j/dashboard">
             <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
           </a>
 
@@ -36,13 +36,13 @@
               </a>
 
               <div class="navbar-dropdown">
-                <a class="navbar-item" href="jobseeker-profile.html">
+                <a class="navbar-item" href="?key=j/profile">
                   <span class="icon is-small is-left">
                     <i class="fas fa-user-cog"></i>
                   </span>
                   &nbsp&nbsp Profile
                 </a>
-                <a class="navbar-item">
+                <a class="navbar-item" href="?key=j/report-issue">
                   <span class="icon is-small is-left">
                     <i class="fas fa-bug"></i>
                   </span>
@@ -65,7 +65,7 @@
         <div class="column is-2 side-menu">
           <aside class="menu white-background">
             <ul class="menu-list">
-              <li><a href="jobseeker-dashboard.html" class="subtitle is-4">Jobs</a></li>
+              <li><a href="?key=j/dashboard" class="subtitle is-4">Jobs</a></li>
               <li><a class="subtitle is-4">Applications</a></li>
               <li><a class="subtitle is-4">My Documents</a></li>
             </ul>
@@ -180,6 +180,57 @@
               </div>
             </div>
             <div class="box" id="job-list">
+              <article class="media" onclick="window.location='?key=j/job'">
+                <figure class="media-left">
+                  <p class="image is-64x64">
+                    <img src="https://bulma.io/images/placeholders/128x128.png">
+                  </p>
+                </figure>
+                <div class="media-content">
+                  <div class="content">
+                    <p>
+                      <strong>position (employment type)</strong> <br />
+                      company name<br />
+                      city, Indonesia | IDR. min_salary-max_salary<br />
+                      <small class="is-pulled-right">Until expire_date</small>
+                    </p>
+                  </div>
+                </div>
+              </article>
+              <article class="media" onclick="window.location='?key=j/job'">
+                <figure class="media-left">
+                  <p class="image is-64x64">
+                    <img src="https://bulma.io/images/placeholders/128x128.png">
+                  </p>
+                </figure>
+                <div class="media-content">
+                  <div class="content">
+                    <p>
+                      <strong>Web Developer (Internship)</strong> <br />
+                      Garena Indonesia<br />
+                      Jakarta, Indonesia | IDR. 4,000,000 - 4,000,000<br />
+                      <small class="is-pulled-right">Until 20 May 2020</small>
+                    </p>
+                  </div>
+                </div>
+              </article>
+              <article class="media" onclick="window.location='?key=j/job'">
+                <figure class="media-left">
+                  <p class="image is-64x64">
+                    <img src="https://bulma.io/images/placeholders/128x128.png">
+                  </p>
+                </figure>
+                <div class="media-content">
+                  <div class="content">
+                    <p>
+                      <strong>Associate Web Developer (Full time)</strong> <br />
+                      Garena Indonesia<br />
+                      Jakarta, Indonesia | IDR. 7,500,000 - 8,500,000<br />
+                      <small class="is-pulled-right">Until 20 May 2020</small>
+                    </p>
+                  </div>
+                </div>
+              </article>
             </div>
           </div>
           <div class="column">

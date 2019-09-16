@@ -27,7 +27,7 @@
               <div class="column is-2">
               </div>
             </div>
-            <form class="form" action="#" method="POST">
+            <form action="/view?key=j/dashboard" method="POST"> <!-- CHANGE THIS -->
               <div class="box-title">
                 <br/>
                 <h4 class="subtitle is-4">Signin as jobseeker</h4>
@@ -38,7 +38,7 @@
                 <div class="column is-8">
                   <div class="field">
                     <p class="control has-icons-left has-icons-right">
-                      <input class="input" id="jobseeker-signin-email-input" type="email" placeholder="Email">
+                      <input class="input" id="jobseeker-signin-email-input" type="email" placeholder="Email" required>
                       <span class="icon is-small is-left">
                         <i class="fas fa-envelope"></i>
                       </span>
@@ -46,7 +46,7 @@
                   </div>
                   <div class="field">
                     <p class="control has-icons-left">
-                      <input class="input" id="jobseeker-signin-password-input" type="password" placeholder="Password">
+                      <input class="input" id="jobseeker-signin-password-input" type="password" placeholder="Password" required>
                       <span class="icon is-small is-left">
                         <i class="fas fa-lock"></i>
                       </span>
@@ -54,7 +54,8 @@
                   </div>
                   <div class="field">
                     <p class="control">
-                      <button onclick="jobseekerSignin()" class="button is-info is-fullwidth" name="btnSubmit" type="button">Signin</button>
+                      {{csrf_field()}}
+                      <input type="submit" class="button is-info is-fullwidth" name="btnSubmit" type="button" value="Signin">
                     </p>
                   </div>
                 </div>
@@ -62,7 +63,7 @@
                 </div>
               </div><br />
             </form>
-            <form class="form" id="jobseeker-signup" method="POST">
+            <form action="/view?key=j/dashboard" method="POST"> <!-- CHANGE THIS -->
               <div class="box-title">
                 <br/>
                 <h4 class="subtitle is-4">Signup as jobseeker</h4>
@@ -73,7 +74,7 @@
                 <div class="column is-8">
                   <div class="field">
                     <p class="control has-icons-left has-icons-right">
-                      <input id="jobseeker-signup-name-input" class="input" type="text" placeholder="Name" name="name">
+                      <input id="jobseeker-signup-name-input" class="input" type="text" placeholder="Name" name="name" required>
                       <span class="icon is-small is-left">
                         <i class="fas fa-user"></i>
                       </span>
@@ -81,7 +82,7 @@
                   </div>
                   <div class="field">
                     <p class="control has-icons-left has-icons-right">
-                      <input id="jobseeker-signup-email-input" class="input" type="email" placeholder="Email" name="email">
+                      <input id="jobseeker-signup-email-input" class="input" type="email" placeholder="Email" name="email" required>
                       <span class="icon is-small is-left">
                         <i class="fas fa-envelope"></i>
                       </span>
@@ -89,7 +90,7 @@
                   </div>
                   <div class="field">
                     <p class="control has-icons-left">
-                      <input id="jobseeker-signup-password-input" class="input" type="password" placeholder="Password" name="password">
+                      <input id="jobseeker-signup-password-input" class="input" type="password" placeholder="Password" name="password" required>
                       <span class="icon is-small is-left">
                         <i class="fas fa-lock"></i>
                       </span>
@@ -97,7 +98,7 @@
                   </div>
                   <div class="field">
                     <p class="control has-icons-left">
-                      <input id="jobseeker-signup-password-confirm-input" class="input" type="password" placeholder="Repeat password" name="password_confirmation">
+                      <input id="jobseeker-signup-password-confirm-input" class="input" type="password" placeholder="Repeat password" name="password_confirmation" required>
                       <span class="icon is-small is-left">
                         <i class="fas fa-lock"></i>
                       </span>
@@ -106,14 +107,15 @@
                   <div class="field">
                     <div class="control">
                       <label class="checkbox">
-                        <input type="checkbox">
+                        <input type="checkbox" required>
                         I have read and accept <a href="#">terms and conditions</a>
                       </label>
                     </div>
                   </div>
                   <div class="field">
                     <p class="control">
-                      <button onclick="jobseekerSignup()" id="jobseeker-signup-btn" class="button is-info is-fullwidth" name="btnSubmit" type="button">Signup</button>
+                      {{csrf_field()}}
+                      <input type="submit" class="button is-info is-fullwidth" name="btnSubmit" type="button" value="Signup">
                     </p>
                   </div>
                 </div>

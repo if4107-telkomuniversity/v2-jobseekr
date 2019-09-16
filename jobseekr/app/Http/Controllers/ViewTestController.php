@@ -39,6 +39,18 @@ class ViewTestController extends Controller
                 case 'report-issue':
                     $post = 'report-an-issue';
                     break;
+                case 'job':
+                    $post = 'job-detail';
+                    break;
+                case 'apply':
+                    $post = 'apply-job';
+                    break;
+                case 'submit':
+                    $post = 'job-application-done';
+                    break;
+                case 'profile':
+                    $post = 'profile';
+                    break;
             }
         } catch (\Exception $e) {
             return response()->json(['err' => 'not found'], 404);
