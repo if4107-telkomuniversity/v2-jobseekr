@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Applicant Summary | JobSeekr</title>
+    <title>Thanks for responding! | JobSeekr</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
     <link rel="stylesheet" href="css/app.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
@@ -15,7 +15,7 @@
       <div class="columns">
         <div class="column is-4 navbar-left">
           <div class="navbar-brand">
-            <a class="navbar-item" href="https://bulma.io">
+            <a class="navbar-item" href="?key=r/dashboard">
               <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
             </a>
 
@@ -43,6 +43,7 @@
             <a class="navbar-link jobseeker-name">
               {Username}
             </a>
+
             <div class="navbar-dropdown">
               <a class="navbar-item">
                 <span class="icon is-small is-left">
@@ -50,14 +51,14 @@
                 </span>
                 &nbsp&nbsp Profile
               </a>
-              <a class="navbar-item">
+              <a class="navbar-item" onclick="window.location='?key=r/report-issue'">
                 <span class="icon is-small is-left">
                   <i class="fas fa-bug"></i>
                 </span>
-                &nbsp&nbsp Report an issue
+                &nbsp&nbsp  Report an Issue
               </a>
               <hr class="navbar-divider">
-              <a class="navbar-item" onClick="signout()">
+              <a class="navbar-item" onClick="window.location='/view'">
                 <span class="icon is-small is-left">
                   <i class="fas fa-sign-out-alt"></i>
                 </span>
@@ -74,28 +75,35 @@
         <div class="column is-2 side-menu">
           <aside class="menu white-background">
             <ul class="menu-list">
-              <li><a href="recruiter-dashboard.html" class="subtitle is-4">Jobs</a></li>
+              <li><a href="?key=r/dashboard" class="subtitle is-4">Jobs</a></li>
               <li><a class="subtitle is-4">Post Job</a></li>
             </ul>
           </aside>
-        </div>
       </div>
       <div class="column is-10">
         <div class="columns">
           <div class="column is-4">
           </div>
-          <div class="column is-8" id="applicants">
+          <div class="column is-8 jobs-content">
+            <div class="box has-text-centered single-container">
+              <h4 class="subtitle has-text-weight-semibold is-4">Your application has been sent!</h4>
+              <div class="is-flex is-horizontal-center">
+                <figure class="image is-128x128">
+                  <img class="is-rounded" src="images/checkbox-green.png">
+                </figure>
+              </div>
+              <br/>
+              <span class="subtitle is-5">Thanks for your review.</span><br/>
+              <span class="subtitle is-5">We will notify </span>
+              <span class="subtitle is-5 application-name">{jobseeker.name}</span><br/>
+              <span class="subtitle is-5">for this update.</span><br/>
+              <br/>
+              <a href="?key=r/dashboard" class="button is-info">&nbsp&nbspGot it!&nbsp&nbsp</a>
+            </div>
           </div>
           <div class="column">
           </div>
         </div>
       </div>
   </body>
-  <script>
-    function callFunctions() {
-      checkAuth();
-      formatForUser();
-      loadApplicantOfJob();
-    }
-  </script>
 </html>

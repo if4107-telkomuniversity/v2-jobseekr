@@ -14,7 +14,7 @@
     <nav class="navbar" role="navigation" aria-label="main navigation">
       <div class="container">
         <div class="navbar-brand">
-          <a class="navbar-item" href="https://bulma.io">
+          <a class="navbar-item" href="?key=r/dashboard">
             <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
           </a>
 
@@ -42,14 +42,14 @@
                   </span>
                   &nbsp&nbsp Profile
                 </a>
-                <a class="navbar-item">
+                <a class="navbar-item" onclick="window.location='?key=r/report-issue'">
                   <span class="icon is-small is-left">
                     <i class="fas fa-bug"></i>
                   </span>
-                  &nbsp&nbsp Report an issue
+                  &nbsp&nbsp  Report an Issue
                 </a>
                 <hr class="navbar-divider">
-                <a class="navbar-item" onClick="signout()">
+                <a class="navbar-item" onClick="window.location='/view'">
                   <span class="icon is-small is-left">
                     <i class="fas fa-sign-out-alt"></i>
                   </span>
@@ -65,7 +65,7 @@
         <div class="column is-2 side-menu">
           <aside class="menu white-background">
             <ul class="menu-list">
-              <li><a href="recruiter-dashboard.html" class="subtitle is-4">Jobs</a></li>
+              <li><a href="?key=r/dashboard" class="subtitle is-4">Jobs</a></li>
               <li><a class="subtitle is-4">Post Job</a></li>
             </ul>
           </aside>
@@ -179,7 +179,7 @@
               </div>
             </div>
             <div class="box" id="job-list">
-              <article class="media" onclick="window.location='?key=r/job'">
+              <article class="media" onclick="window.location='?key=r/applicant'">
                 <figure class="media-left">
                   <p class="image is-64x64">
                     <img src="https://bulma.io/images/placeholders/128x128.png">
@@ -196,7 +196,7 @@
                   </div>
                 </div>
               </article>
-              <article class="media" onclick="seeJob(` + job.id + `)">
+              <article class="media" onclick="window.location='?key=r/applicant'">
                 <figure class="media-left">
                   <p class="image is-64x64">
                     <img src="https://bulma.io/images/placeholders/128x128.png">
@@ -213,7 +213,7 @@
                   </div>
                 </div>
               </article>
-              <article class="media" onclick="seeJob(` + job.id + `)">
+              <article class="media" onclick="window.location='?key=r/applicant'">
                 <figure class="media-left">
                   <p class="image is-64x64">
                     <img src="https://bulma.io/images/placeholders/128x128.png">
@@ -230,7 +230,7 @@
                   </div>
                 </div>
               </article>
-              <article class="media" onclick="seeJob(` + job.id + `)">
+              <article class="media" onclick="window.location='?key=r/applicant'">
                 <figure class="media-left">
                   <p class="image is-64x64">
                     <img src="https://bulma.io/images/placeholders/128x128.png">
@@ -247,7 +247,7 @@
                   </div>
                 </div>
               </article>
-              <article class="media" onclick="seeJob(` + job.id + `)">
+              <article class="media" onclick="window.location='?key=r/applicant'">
                 <figure class="media-left">
                   <p class="image is-64x64">
                     <img src="https://bulma.io/images/placeholders/128x128.png">
