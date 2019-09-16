@@ -1,0 +1,40 @@
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateTableJobseeker extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('jobseeker', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name')->index();
+            $table->string('email')->index();
+            $table->string('password');
+            $table->string('username');
+            $table->string('address');
+            $table->string('phoneNumber');
+            $table->string('summary');
+            $table->string('cv_id');
+            $table->string('resume_id');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        //
+    }
+}
