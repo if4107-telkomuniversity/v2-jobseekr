@@ -95,7 +95,7 @@
               <span class="subtitle is-5">feel free to report by hitting the button below.</span><br/>
               <span class="subtitle is-5">Any feedback will make JobSeekr better</span><br/>
               <br/>
-              <a href="https://github.com/vayupranaditya/JobSeekr/issues/new" class="button is-info" target="_blank">&nbsp&nbspGot it!&nbsp&nbsp</a>
+              <a onclick="submitIssue()" class="button is-info" target="_blank">&nbsp&nbspGot it!&nbsp&nbsp</a>
             </div>
           </div>
           <div class="column">
@@ -103,4 +103,10 @@
         </div>
       </div>
   </body>
+  <script>
+  const submitIssue = () => {
+    window.open('https://github.com/vayupranaditya/JobSeekr/issues/new', '_blank');
+    window.location='?key=r/dashboard';
+  }
+  </script>
 </html>
