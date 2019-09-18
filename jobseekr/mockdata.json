@@ -1,0 +1,417 @@
+// RECRUITER
+// dashboard - /view?key=r/dashboard
+{
+	"name": "Beladina",	// nama user
+	"job": 
+	[	// minimal ada 12 job
+		{
+			"id": "1",
+			"name": "Front End Developer",	// nama posisi
+			"type": "Full time",	// full time/part time/internship
+			"salary": 
+			{
+				"min": "15000000",
+				"max": "20000000"
+			},
+			"applicant_count": "9",	// 0 - bebas
+			"date_posted": "17 Sept 2019",
+			"date_expired":	"17 Oct 2019"
+		},
+    	{
+			"id": "2",
+			"name": "Back End Developer",	// nama posisi
+			"type": "Full time",	// full time/part time/internship
+			"salary": 
+			{
+				"min": "15000000",
+				"max": "20000000"
+			},
+			"applicant_count": "0",	// 0 - bebas
+			"date_posted": "11 Sept 2019",
+			"date_expired":	"10 Oct 2019"
+		},
+    	{
+			"id": "3",
+			"name": "Test Automation Engineer",	// nama posisi
+			"type": "Full time",	// full time/part time/internship
+			"salary": 
+			{
+				"min": "7000000",
+				"max": "11000000"
+			},
+			"applicant_count": "7",	// 0 - bebas
+			"date_posted": "10 Sept 2019",
+			"date_expired":	"5 Oct 2019"
+		},
+    	{
+			"id": "4",
+			"name": "Valuation Actuary",	// nama posisi
+			"type": "Full time",	// full time/part time/internship
+			"salary": 
+			{
+				"min": "6000000",
+				"max": "9000000"
+			},
+			"applicant_count": "8",	// 0 - bebas
+			"date_posted": "12 Sept 2019",
+			"date_expired":	"20 Oct 2019"
+		},
+    	{
+			"id": "5",
+			"name": "Internship",	// nama posisi
+			"type": "Part time",	// full time/part time/internship
+			"salary": 
+			{
+				"min": "4000000",
+				"max": "6000000"
+			},
+			"applicant_count": "23",	// 0 - bebas
+			"date_posted": "5 Sept 2019",
+			"date_expired":	"5 Oct 2019"
+		},
+    	{
+			"id": "6",
+			"name": "Tax Supervisor",	// nama posisi
+			"type": "Full time",	// full time/part time/internship
+			"salary": 
+			{
+				"min": "11000000",
+				"max": "15000000"
+			},
+			"applicant_count": "6",	// 0 - bebas
+			"date_posted": "2 Sept 2019",
+			"date_expired":	"3 Oct 2019"
+		},
+    	{
+			"id": "7",
+			"name": "Oracle Developer",	// nama posisi
+			"type": "Full time",	// full time/part time/internship
+			"salary": 
+			{
+				"min": "9000000",
+				"max": "15000000"
+			},
+			"applicant_count": "4",	// 0 - bebas
+			"date_posted": "17 Jul 2019",
+			"date_expired":	"22 Sept 2019"
+		},
+    	{
+			"id": "8",
+			"name": "Walk in Customer Service",	// nama posisi
+			"type": "Full time",	// full time/part time/internship
+			"salary": 
+			{
+				"min": "7000000",
+				"max": "10000000"
+			},
+			"applicant_count": "10",	// 0 - bebas
+			"date_posted": "1 Sept 2019",
+			"date_expired":	"1 Oct 2019"
+		},
+    	{
+			"id": "9",
+			"name": "HR Business Partner",	// nama posisi
+			"type": "Full time",	// full time/part time/internship
+			"salary": 
+			{
+				"min": "9000000",
+				"max": "11000000"
+			},
+			"applicant_count": "13",	// 0 - bebas
+			"date_posted": "17 Aug 2019",
+			"date_expired":	"17 Nov 2019"
+		},
+    	{
+			"id": "10",
+			"name": "UX Researcher",	// nama posisi
+			"type": "Full time",	// full time/part time/internship
+			"salary": 
+			{
+				"min": "10000000",
+				"max": "15000000"
+			},
+			"applicant_count": "28",	// 0 - bebas
+			"date_posted": "1 Sept 2019",
+			"date_expired":	"17 Oct 2019"
+		},
+    	{
+			"id": "11",
+			"name": "Front End Developer",	// nama posisi
+			"type": "Full time",	// full time/part time/internship
+			"salary": 
+			{
+				"min": "6000000",
+				"max": "10000000"
+			},
+			"applicant_count": "9",	// 0 - bebas
+			"date_posted": "17 Sept 2019",
+			"date_expired":	"17 Oct 2019"
+		},
+    	{
+			"id": "12",
+			"name": "Front End Developer",	// nama posisi
+			"type": "Full time",	// full time/part time/internship
+			"salary": 
+			{
+				"min": "6000000",
+				"max": "10000000"
+			},
+			"applicant_count": "9",	// 0 - bebas
+			"date_posted": "17 Sept 2019",
+			"date_expired":	"17 Oct 2019"
+		},
+	]
+}
+
+// application list - /view?key=r/applicant
+{
+	"name": "Beladina",
+	"application": 
+	[	// minimal ada 12
+		{
+			"id": "1",
+			"name": "Angela",
+			"summary": "Ini Summary 1.",
+			"img_url": "string"
+		},
+    	{
+			"id": "2",
+			"name": "Vayu",
+			"summary": "Ini Summary 2.",
+			"img_url": "string"
+		},
+    	{
+			"id": "3",
+			"name": "Aider",
+			"summary": "Ini Summary 3.",
+			"img_url": "string"
+		},
+    	{
+			"id": "4",
+			"name": "Triska",
+			"summary": "Ini Summary 4.",
+			"img_url": "string"
+		},
+    	{
+			"id": "5",
+			"name": "Wulan",
+			"summary": "Ini Summary 5.",
+			"img_url": "string"
+		},
+    	{
+			"id": "6",
+			"name": "Rani",
+			"summary": "Ini Summary 6.",
+			"img_url": "string"
+		},
+    	{
+			"id": "7",
+			"name": "Raisa",
+			"summary": "Ini Summary 7.",
+			"img_url": "string"
+		},
+    	{
+			"id": "8",
+			"name": "Ilmi",
+			"summary": "Ini Summary 8.",
+			"img_url": "string"
+		},
+    	{
+			"id": "9",
+			"name": "Daus",
+			"summary": "Ini Summary 9.",
+			"img_url": "string"
+		},
+    	{
+			"id": "10",
+			"name": "Shindy",
+			"summary": "Ini Summary 10.",
+			"img_url": "string"
+		},
+    	{
+			"id": "11",
+			"name": "Firhan",
+			"summary": "Ini Summary 11.",
+			"img_url": "string"
+		},
+    	{
+			"id": "12",
+			"name": "Dafa",
+			"summary": "Ini Summary 12.",
+			"img_url": "string"
+		}
+	]
+}
+
+// application detail - /view?key=r/application-detail
+{
+	"name": "Bela",
+	"application": 
+	{
+		"id": "1",
+		"name": "Angela",
+		"summary": "Ini Summary 1.",
+		"img_url": "string",
+		"experience": 
+		[		// minimal ada 2
+			{
+				"position": "Web Developer",
+				"company": "Allianz",
+				"duration": "6 months",
+				"img_url": "string"
+			},
+      		{
+				"position": "Back End Developer",
+				"company": "Gojek",
+				"duration": "12 months",
+				"img_url": "string"
+			}
+		]
+	}
+}
+
+// application respond - /view?key=r/respond
+{
+	"name": "Beladina",
+	"applicant_name": "Vayu"
+}
+
+// JOBSEEKER
+// dashboard - ?key=j/dashboard
+{
+    "name": "Angela",
+    "job": [
+        {
+            "position": "UX Researcher",
+            "type": "Full time",
+            "company": {
+                "id": "1",
+                "name": "Gojek"
+            },
+            "city": "Jakarta",
+            "salary": {
+                "min": "10000000",
+                "max": "15000000"
+            },
+            "date_expire": "17 Oct 2019"
+        },
+        {
+            "position": "HR Business Partner",
+            "type": "Full time",
+            "company": {
+                "id": "2",
+                "name": "Bank Mandiri"
+            },
+            "city": "Jakarta",
+            "salary": {
+                "min": "9000000",
+                "max": "11000000"
+            },
+            "date_expire": "17 Nov 2019"
+        }
+    ]
+}
+
+// job detail - ?key=j/job
+{
+    "name": "Angela",
+    "job": {
+        "id": "10",
+        "position": "HR Business Partner",
+        "type": "Full Time",
+        "company": {
+            "name": "Bank Mandiri",
+            "img_url": "string",
+            "industry": {
+                "id": "int",
+                "name": "string"
+            },
+            "address": "string",
+            "city": "string"
+        },
+        "city": "Jakarta",
+        "salary": {
+            "min": "9000000",
+            "max": "11000000"
+        },
+        "summary": "this is summary field",
+        "qualification": "minimum qualification : S1",
+        "category": {
+            "id": "int",
+            "name": "string"
+        },
+        "date_posted": "17 Aug 2019",
+        "date_expired": "17 Nov 2019"
+    }
+}
+
+// apply job - ?key=j/apply
+{
+    "name": "Angela",
+    "address": "Medan",
+    "email": "angela@mail.com",
+    "phone": "081234567890",
+    "summary": "Ini summary loo",
+    "job_id": "10",
+	"img_url": "string",
+    "experience": [
+        {
+            "id": "1",
+            "position": "Web Developer",
+            "company": "Allianz",
+            "duration": "6 month",
+            "img_url": "string"
+        },
+        {
+            "id": "2",
+            "position": "Back End Developer",
+            "company": "Gojek",
+            "duration": "12 month",
+            "img_url": "string"
+        }
+    ]
+}
+
+// submit job - ?key=j/submit
+{
+    "name": "Angela",
+    "company": "Gojek"
+}
+
+// profile - ?key=j/profile
+{
+    "name": "Angela",
+    "img_url": "string",
+    "phone": "081234567890",
+    "experience": [
+        {
+            "id": "1",
+            "position": "Web Developer",
+            "company": "Allianz",
+            "duration": "6 month",
+            "img_url": "string"
+        },
+        {
+            "id": "2",
+            "position": "Back End Developer",
+            "company": "Gojek",
+            "duration": "12 month",
+            "img_url": "string"
+        }
+    ],
+    "cv": {
+        "id": "1",
+        "filename": "filecv",
+        "url": "linkcv.com"
+    },
+    "resume": {
+        "id": "2",
+        "filename": "fileresume",
+        "url": "linkresume.com"
+    },
+}
+
+// report an issue - j/report-issue
+{
+    "name": "Angela"
+}
