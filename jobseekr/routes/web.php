@@ -15,42 +15,46 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('jobseeker/auth', 'JobseekerController@showAuthForm')->name('authJobseeker');
-Route::post('jobseeker/auth/login' , 'JobseekerController@login');
-Route::post('jobseeker/auth/register', 'JobseekerController@register');
-Route::post('jobseeker/logout', 'JobseekerController@logout']);
+Route::prefix('auth')->group(function(){
+    Route::get('', 'JobseekerController@showAuthForm')->name('authJobseeker');
+    Route::post('login' , 'JobseekerController@login');
+    Route::post('register', 'JobseekerController@register');
+    Route::post('logout', 'JobseekerController@logout']);
+});
 
-Route::get('jobseeker/dashboard', 'JobseekerController@showDashboard');
-Route::get('jobseeker/{search}/search', 'JobseekerController@searchJob');
+Route::get('dashboard', 'JobseekerController@showDashboard');
+Route::get('job/search', 'JobController@search');
 
-Route::get('jobseeker/job-apply', 'JobseekerController@showApplyJobForm');
-Route::put('jobseeker/{id}/edit-about-profile', 'JobseekerController@editProfile');
-Route::put('jobseeker/{id}/edit-summary', 'JobseekerController@editSummary');
-Route::put('jobseeker/{id}/edit-work-experience', 'JobController@editWorkExp');
-Route::put('jobseeker/{id}/{document}/edit-document', 'JobController@editDocument');
-Route::post('jobseeker/job-apply', 'JobseekerController@applyJob');
+Route::get('job-apply', 'JobseekerController@showApplicationForm');
+Route::put('profile/about/edit', 'JobseekerController@updateProfile');
+Route::put('summary/edit', 'JobseekerController@updateSummary');
+Route::put('experience/edit', 'JobController@updateWorkExperience');
+Route::put('document/edit/{document}', 'JobController@updateDocument');
+Route::post('jobseeker/job/apply', 'JobseekerController@applyJob');
 
-Route::get('jobseeker/{id}/edit-profile', 'JobseekerController@showProfileForm');
+Route::get('jobseeker/edit-profile', 'JobseekerController@showProfileForm');
 
-Route::get('jobseeker/applications', 'JobseekerController@showApplications');
+Route::get('jobseeker/application', 'JobseekerController@showApplication');
 
-Route::get('job/{id}/profile', 'JobController@showJobProfile');
+Route::get('job/profile', 'JobController@showJobProfile');
 
+Route::prefix('recruiter')->group(function(){
+    Route::prefix('auth')->group(function(){
+        Route::get('', 'RecruiterController@showAuthForm')->name('authRecruiter');
+        Route::post('login' , 'RecruiterController@login');
+        Route::post('register', 'RecruiterController@register');
+        Route::post('logout', 'RecruiterController@logout']);
+    });
 
-Route::get('recruiter/auth', 'RecruiterController@showAuthForm')->name('authRecruiter');
-Route::post('recruiter/auth/login' , 'RecruiterController@login');
-Route::post('recruiter/auth/register', 'RecruiterController@register');
-Route::post('recruiter/logout', 'RecruiterController@logout']);
+    Route::get('dashboard', 'RecruiterController@showDashboard');
+    Route::get('job/search', 'RecruiterController@searchJob');
 
-Route::get('recruiter/dashboard', 'RecruiterController@showDashboard');
-Route::get('recruiter/{search}/search', 'RecruiterController@searchJob');
+    Route::get('company/profile/edit', 'CompanyController@showCompanyProfile');
+    Route::put('company/about/edit', 'CompanyController@updateCompanyProfile');
+    Route::put('company/summary/edit', 'CompanyController@updateSummaryCompany');
 
-Route::get('recruiter/{id}/edit-company-profile', 'RecruiterController@showCompanyProfile');
-Route::put('recruiter/{id}/edit-about-company', 'RecruiterController@editCompanyProfile');
-Route::put('recruiter/{id}/edit-summary-company', 'RecruiterController@editSummaryCompany');
+    Route::get('job-detail', 'JobController@showJobDetail');
 
-Route::get('recruiter/{id}/job-details', 'RecruiterController@showJobDetails');
-
-Route::get('recruiter/{id}/jobseeker-details', 'RecruiterController@showJobseekerDetails');
-Route::post('recruiter/{id}/jobseeker-acceptance', 'RecruiterController@acceptJobseeker');
-Route::delete('recruiter/{id}/jobseeker-reject', 'RecruiterController@declineJobseeker');
+    Route::get('application/{id}/confirm', 'JobApplicationController@showJobseekerDetail');
+    Route::post('applicant/confirm', 'JobApplicationController@confirmationJobseeker');
+});
