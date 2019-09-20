@@ -23,13 +23,7 @@ class JobController extends Controller
         //ada pengubahan data terus disimpen
     }
 
-    public function showJobProfile(){ //fix
-        $path = Storage::disk('public')->get('job-detail-jobseeker.json');
-        $json = json_decode($path,true); 
-        return view('jobseeker/job-detail',compact('json'));
-    }
-
-    public function showJobDetail(){ //fix
+    public function showJobDetail(){
         $path = Storage::disk('public')->get('job-detail-jobseeker.json');
         $json = json_decode($path,true);
         return view('jobseeker/job-detail',compact('json'));

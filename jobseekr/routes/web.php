@@ -36,8 +36,6 @@ Route::get('jobseeker/edit-profile', 'JobseekerController@showProfileForm');
 
 Route::get('jobseeker/application', 'JobseekerController@showApplication');
 
-Route::get('job/profile', 'JobController@showJobProfile');
-
 Route::prefix('recruiter')->group(function(){
     Route::prefix('auth')->group(function(){
         Route::get('', 'RecruiterController@showAuthForm')->name('authRecruiter');

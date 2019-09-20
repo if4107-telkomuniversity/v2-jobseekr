@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class JobseekerController extends Controller
 {
     //
-    public function showAuthForm(){ //fix
+    public function showAuthForm(){ 
         return view('jobseeker/auth');
     }
 
@@ -53,13 +53,13 @@ class JobseekerController extends Controller
         return redirect('welcome');
     }
 
-    public function showDashboard(){ //fix
+    public function showDashboard(){
         $path = Storage::disk('public')->get('dashboard-jobseeker.json');
         $data = json_decode($path,true);
         return view('jobseeker/dashboard',compact('data'));
     }
 
-    public function showApplicationForm(){ //fix
+    public function showApplicationForm(){
         return view('jobseeker/apply-job');
     }
 
@@ -81,7 +81,7 @@ class JobseekerController extends Controller
         //return view after apply job
     }
 
-    public function showProfileForm(){ //fix
+    public function showProfileForm(){
         return view('jobseeker/profile');
     }
 

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class RecruiterController extends Controller
 {
     //
-    public function showAuthForm(){ //fix
+    public function showAuthForm(){
         return view('recruiter/auth');
     }
 
@@ -53,7 +53,7 @@ class RecruiterController extends Controller
         return redirect('welcome');
     }
 
-    public function showDashboard(){ //fix
+    public function showDashboard(){ 
         $path = Storage::disk('public')->get('dashboard-recruiter.json');
         $data = json_decode($path,true);
         return view('recruiter/dashboard',compact('data'));
