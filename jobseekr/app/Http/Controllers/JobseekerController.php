@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class JobseekerController extends Controller
 {
     //
-    public function showAuthForm(){ //fixed
+    public function showAuthForm(){ //fix
         return view('jobseeker/auth');
     }
 
@@ -48,42 +48,45 @@ class JobseekerController extends Controller
         return redirect('login')->with('alert-success','Kamu berhasil Register');
     }
 
-    public function logout(){ //not yet
+    public function logout(){ //maybe
         Session::flush();
         return redirect('welcome');
     }
 
-    public function showDashboard(){ //fixed
-        $data = storage_path('mockdata.json');
+    public function showDashboard(){ //fix
+        $path = Storage::disk('public')->get('dashboard-jobseeker.json');
+        $data = json_decode($path,true);
         return view('jobseeker/dashboard',compact('data'));
     }
 
-    public function searchJob($search){ //not yet
-        $data = storage_path('mockdata.json'); //ubah data yang di show sesuai yang di search
-        return view('jobseeker/dashboard',compact('data'));
-    }
-
-    public function showApplyJobForm(){
+    public function showApplicationForm(){ //fix
         return view('jobseeker/apply-job');
     }
 
-    public function applyJob(){ //lanjutan showApplyJobForm
-        
-    }
-
-    public function showProfileForm(){
+    public function updateProfile($data){ //not yet
+        //search data di json
+        //diubah
         return view('jobseeker/profile');
     }
 
-    public function editProfile(){ //lanjutan showProfileForm
-        //ada pengubahan data terus disimpen
+    public function updateSummary($data){ //not yet
+        //search data di json
+        //diubah
+        return view('jobseeker/profile');
     }
 
-    public function editSummary(){ //lanjutan showProfileForm
-        //ada pengubahan data terus disimpen
+    public function applyJob(){ //not yet | lanjutan showApplicationForm
+        //isi data applyjob
+        //disave
+        //return view after apply job
     }
 
-    /*public function showApplications(){
-        
-    }*/
+    public function showProfileForm(){ //fix
+        return view('jobseeker/profile');
+    }
+
+    public function showApplication(){ //not yet
+        //ngambil data application
+        //return view application
+    }
 }

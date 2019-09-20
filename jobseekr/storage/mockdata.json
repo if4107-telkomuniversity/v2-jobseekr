@@ -1,6 +1,6 @@
 // RECRUITER
 // dashboard - /view?key=r/dashboard
-/*{
+{
 	"name": "Beladina",	// nama user
 	"job": 
 	[	// minimal ada 12 job
@@ -164,7 +164,7 @@
 }
 
 // application list - /view?key=r/applicant
-/*{
+{
 	"name": "Beladina",
 	"application": 
 	[	// minimal ada 12
@@ -409,7 +409,7 @@
         "filename": "fileresume",
         "url": "linkresume.com"
     },
-}*/
+}
 
 // report an issue - j/report-issue
 {

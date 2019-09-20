@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class RecruiterController extends Controller
 {
     //
-    public function showAuthForm(){ //fixed
+    public function showAuthForm(){ //fix
         return view('recruiter/auth');
     }
 
@@ -53,49 +53,18 @@ class RecruiterController extends Controller
         return redirect('welcome');
     }
 
-    public function showDashboard(){ //fixed
-        $data = storage_path('mockdata.json');
+    public function showDashboard(){ //fix
+        $path = Storage::disk('public')->get('dashboard-recruiter.json');
+        $data = json_decode($path,true);
         return view('recruiter/dashboard',compact('data'));
     }
 
     public function searchJob($search){ //not yet
-        $data = storage_path('mockdata.json'); //ubah data dulu
+        $path = Storage::disk('public')->get('dashboard-recruiter.json');
+        $json = json_decode($path,true);
+        $data = '123' ; //ubah data dulu
         return view('recruiter/dashboard',compact('data'));
     }
 
-    /*public function showCompanyProfile(){
-
-    }
-
-    public function editCompanyProfile(){
-
-    } 
-
-    public function editSummaryCompany(){
-
-    }
-
-    public function showJobDetails(){
-
-    }*/
-
-    public function showJobseekerSummary(){ //fixed
-        $data = storage_path('mockdata.json');
-        return view('recruiter/applicant-summary',compact('data'));
-    }
-
-    public function showJobseekerDetails(){ //fixed
-        $data = storage_path('mockdata.json');
-        return view('recruiter/application-detail',compact('data'));
-    }
-
-    public function acceptJobseeker(){ //not yet
-        $data = storage_path('mockdata.json');
-        return view('recruiter/application-respond',compact('data'));
-    }
-
-    public function declineJobseeker(){ //not yet
-        $data = storage_path('mockdata.json');
-        return view('recruiter/application-respond',compact('data'));
-    }
+    
 }
