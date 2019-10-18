@@ -10,12 +10,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-<<<<<<< Updated upstream
-
-Route::get('/', function () {
-    return view('welcome');
-});
-=======
 Route::prefix('auth')->group(function() {
     Route::get('', 'JobseekerController@showAuthForm')->name('authJobseeker');
     Route::post('login' , 'JobseekerController@login');
@@ -64,4 +58,3 @@ Route::prefix('recruiter')->group(function() {
     Route::get('application/{id}/confirm', 'JobApplicationController@showJobseekerDetail');
     Route::post('applicant/confirm', 'JobApplicationController@confirmationJobseeker');
 });
->>>>>>> Stashed changes
