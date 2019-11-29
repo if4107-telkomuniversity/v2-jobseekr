@@ -14,7 +14,7 @@ Route::prefix('auth')->group(function() {
     Route::get('', 'JobseekerController@showAuthForm')->name('authJobseeker');
     Route::post('login' , 'JobseekerController@login');
     Route::post('register', 'JobseekerController@register');
-    Route::post('logout', 'JobseekerController@logout']);
+    Route::post('logout', 'JobseekerController@logout');
 });
 
 Route::prefix('profile')->group(function() {
@@ -40,7 +40,7 @@ Route::prefix('recruiter')->group(function() {
         Route::get('', 'RecruiterController@showAuthForm')->name('authRecruiter');
         Route::post('login' , 'RecruiterController@login');
         Route::post('register', 'RecruiterController@register');
-        Route::post('logout', 'RecruiterController@logout']);
+        Route::post('logout', 'RecruiterController@logout');
     });
 
     Route::prefix('job')->group(function() {
