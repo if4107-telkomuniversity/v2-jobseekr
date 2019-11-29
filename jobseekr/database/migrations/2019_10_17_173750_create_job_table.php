@@ -18,15 +18,8 @@ class CreateJobTable extends Migration
             $table->text('summary');
             $table->string('name', 191);
             $table->integer('salary')->unsigned();
-            $table->enum('type', ['internship', 'full_time', 'part_time']);
-            $table->enum('min_qualification', [
-                'not_specified',
-                'high_school',
-                'diploma',
-                'bachelor',
-                'master',
-                'doctor'
-            ]);
+            $table->string('type', 10);
+            $table->string('min_qualification', 14);
             $table->integer('company_id')->unsigned();
             $table->integer('category_id')->unsigned();
             $table->date('expired_at');

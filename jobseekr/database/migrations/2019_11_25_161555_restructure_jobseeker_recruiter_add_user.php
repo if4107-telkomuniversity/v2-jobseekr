@@ -16,11 +16,11 @@ class RestructureJobseekerRecruiterAddUser extends Migration
         Schema::create('user', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name', 50);
-            $table->string('phone', 12);
+            $table->string('phone', 12)->nullable();
             $table->string('email', 75);
             $table->string('password', 191);
-            $table->string('remember_token', 191);
-            $table->enum('role', ['recruiter', 'jobseeker', 'admin']);
+            $table->string('remember_token', 191)->nullable();
+            $table->string('role', 10);
             $table->boolean('is_deleted')->default(false);
             $table->timestamps();
 
