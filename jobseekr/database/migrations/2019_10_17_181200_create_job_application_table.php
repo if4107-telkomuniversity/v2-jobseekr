@@ -16,7 +16,7 @@ class CreateJobApplicationTable extends Migration
         Schema::create('job_application', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('jobseeker_id')->unsigned();
-            $table->integer('job_id')->unsigned();
+            $table->bigInteger('job_id')->unsigned();
             $table->string('summary', 200);
             $table->integer('cv_id')->unsigned();
             $table->integer('resume_id')->unsigned();
