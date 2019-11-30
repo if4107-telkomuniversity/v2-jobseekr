@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Industry extends Model
 {
-    protected $table = 'Industry';
+    protected $table = 'industry';
 
     protected $fillable = ['name', 'is_deleted'];
 
