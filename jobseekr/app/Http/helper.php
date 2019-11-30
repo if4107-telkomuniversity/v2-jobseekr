@@ -154,12 +154,14 @@ if (!function_exists('searchJobFromDB')) {
 }
 
 if (!function_exists('showJob')) {
-    function showJob($id, $internalOnly)
+    function showJob($id, $internalOnly=false)
     {
         $job = Job::where('id', $id);
         if ($internalOnly) {
             $companyId = Recruiter::where('user_id', Auth::id())->first()->company_id;
             $job       = $job->where('company_id', $companyId);
+        } else {
+            $job = $job->with('company');
         }
         return $job->firstOrFail();
     }
