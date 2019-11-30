@@ -132,7 +132,7 @@ if (!function_exists('searchJobFromDB')) {
         $withApplicant      = $options['withApplicant'] ?? false;
         $includeExpiredJobs = $options['includeExpiredJobs'] ?? false;
 
-        $jobs = Job::where('position', 'like', "%$query%");
+        $jobs = Job::where('position', 'like', "%$query%")->orderBy('created_at', 'desc');
         if ($internalOnly) {
             $companyId = Recruiter::where('user_id', Auth::id())
                 ->first()->company_id;
