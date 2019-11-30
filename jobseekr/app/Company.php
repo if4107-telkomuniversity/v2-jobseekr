@@ -22,7 +22,7 @@ class Company extends Model
     protected $hidden = ['created_at', 'updated_at'];
 
     public function industry() {
-    	return $this->hasOne('App\Industry');
+    	return $this->belongsTo('App\Industry');
     }
 
     public function jobs() {
