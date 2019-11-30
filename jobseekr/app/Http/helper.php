@@ -128,7 +128,7 @@ if (!function_exists('indexJobCategory')) {
 if (!function_exists('searchJobFromDB')) {
     function searchJobFromDB($query, $options = [])
     {
-        $internalOnly       = $options['internalOnly'] ?? null;
+        $internalOnly       = $options['internalOnly'] ?? false;
         $withApplicant      = $options['withApplicant'] ?? false;
         $includeExpiredJobs = $options['includeExpiredJobs'] ?? false;
 
