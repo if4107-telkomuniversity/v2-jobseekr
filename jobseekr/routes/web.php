@@ -30,9 +30,9 @@ Route::get('application', 'JobseekerController@showApplication');
 
 Route::prefix('job')->group(function() {
     Route::get('search', 'JobController@search');
-    Route::get('{id}', 'JobseekerController@showApplicationForm');
-    Route::post('apply', 'JobseekerController@applyJob');
-    Route::get('profile', 'JobController@showJobProfile');
+    Route::get('{id}', 'JobseekerController@showJobDetail');
+    Route::get('{id}/apply', 'JobseekerController@showApplicationForm');
+    Route::post('{id}/apply', 'JobseekerController@applyJob');
 });
 
 Route::prefix('recruiter')->group(function() {
@@ -45,6 +45,8 @@ Route::prefix('recruiter')->group(function() {
 
     Route::prefix('job')->group(function() {
         Route::get('search', 'RecruiterController@searchJob');
+        Route::get('new', 'JobController@create');
+        Route::post('new', 'JobController@store');
         Route::get('{id}', 'JobController@showJobDetail');
     });
 
