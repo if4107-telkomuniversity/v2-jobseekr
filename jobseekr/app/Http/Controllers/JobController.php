@@ -19,6 +19,9 @@ class JobController extends Controller
         $this->middleware('login:recruiter', [
             'only' => ['store', 'create', 'showJobDetail'],
         ]);
+        $this->middleware('login:jobseeker', [
+            'only' => ['search'],
+        ]);
     }
 
 
@@ -68,5 +71,17 @@ class JobController extends Controller
     		return redirect('/recruiter/dashboard');
     	}
     	return response()->json($job);
+    }
+
+    public function search(Request $request) {
+    	$validation = Validator::make($request->all(), [
+            'q' => 'required'
+        ]);
+        if ($validation->fails()) {
+            return redirect('/dashboard');
+        }
+
+        $jobs = searchJobFromDB($request->q);
+        return response()->json($jobs);
     }
 }

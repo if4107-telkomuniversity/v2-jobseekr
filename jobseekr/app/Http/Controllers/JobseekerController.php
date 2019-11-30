@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Auth;
 use Validator;
 use Illuminate\Database\QueryException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -54,8 +55,8 @@ class JobseekerController extends Controller
     }
 
     public function showDashboard(Request $request) {
-        $user = Auth::user();
-        return response()->json($user);
+        $jobs = indexJob(['withCompany' => true]);
+        return response()->json($jobs);
     }
 
     public function login(Request $request)
@@ -83,5 +84,14 @@ class JobseekerController extends Controller
     public function logout(Request $request) {
         Auth::logout();
         return redirect('/');
+    }
+
+    public function showJobDetail(Request $request, $id) {
+        try {
+            $job = showJob($id);
+        } catch (ModelNotFoundException $e) {
+            return redirect('/dashboard');
+        }
+        return response()->json($job);
     }
 }
