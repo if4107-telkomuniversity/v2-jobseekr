@@ -81,15 +81,23 @@ if (!function_exists('indexJob')) {
         $withCompany        = $options['withCompany'] ?? false;
         $withApplicant      = $options['withApplicant'] ?? false;
         $includeExpiredJobs = $options['includeExpiredJobs'] ?? false;
+        $internalOnly       = $options['internalOnly'] ?? false;
 
-        $query = Job::where('expired_at', '>=', date('Y-m-d'));
+        $job = Job::orderBy('created_at', 'desc');
+        if (!$includeExpiredJobs) {
+            $job = $job->where('expired_at', '>=', date('Y-m-d'));
+        }
+        if ($internalOnly) {
+            $companyId = Recruiter::where('user_id', Auth::id())->first()->company_id;
+            $job       = $job->where('company_id', $companyId);
+        }
         if ($withCompany) {
-            $query = $query->with('company');
+            $job = $job->with('company');
         }
         if ($withApplicant) {
-            $query = $query->withCount('applicants');
+            $job = $job->withCount('applicants');
         }
-        return $query->get();
+        return $job->get();
     }
 }
 
@@ -151,7 +159,7 @@ if (!function_exists('showJob')) {
         $job = Job::where('id', $id);
         if ($internalOnly) {
             $companyId = Recruiter::where('user_id', Auth::id())->first()->company_id;
-            $job = $job->where('company_id', $companyId);
+            $job       = $job->where('company_id', $companyId);
         }
         return $job->firstOrFail();
     }

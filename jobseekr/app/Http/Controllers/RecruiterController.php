@@ -57,7 +57,10 @@ class RecruiterController extends Controller
 
     public function showDashboard(Request $request)
     {
-        $jobs = indexJob(['withApplicant' => true]);
+        $jobs = indexJob([
+            'withApplicant' => true,
+            'internalOnly' => true
+        ]);
         return response()->json($jobs);
     }
 
