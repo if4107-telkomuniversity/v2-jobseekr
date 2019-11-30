@@ -26,7 +26,7 @@ class Job extends Model
     ];
 
     public function company() {
-    	return $this->hasOne('App\Company');
+    	return $this->belongsTo('App\Company');
     }
 
     public function category() {
