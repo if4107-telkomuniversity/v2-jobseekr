@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Auth;
 use Illuminate\Database\QueryException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Validator;
@@ -16,7 +17,7 @@ class JobController extends Controller
     public function __construct()
     {
         $this->middleware('login:recruiter', [
-            'only' => ['store', 'create'],
+            'only' => ['store', 'create', 'showJobDetail'],
         ]);
     }
 
@@ -57,5 +58,15 @@ class JobController extends Controller
             ]);
         }
         return redirect('/recruiter/dashboard');
+    }
+
+    public function showJobDetail(Request $request, $id) {
+    	try {
+	    	$internalOnly = true;
+	    	$job = showJob($id, $internalOnly);
+    	} catch (ModelNotFoundException $e) {
+    		return redirect('/recruiter/dashboard');
+    	}
+    	return response()->json($job);
     }
 }

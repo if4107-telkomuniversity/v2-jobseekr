@@ -2,8 +2,8 @@
 
 use App\Company;
 use App\Job;
-use App\Jobseeker;
 use App\JobCategory;
+use App\Jobseeker;
 use App\Recruiter;
 use App\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -98,14 +98,14 @@ if (!function_exists('newJob')) {
     {
         $companyId = Recruiter::where('user_id', Auth::id())->first()->company_id;
         return Job::create([
-            'position' => $request->position,
-            'summary' => $request->summary,
-            'type' => $request->type,
+            'position'      => $request->position,
+            'summary'       => $request->summary,
+            'type'          => $request->type,
             'min_education' => $request->min_education,
-            'expired_at' => $request->expired_at,
-            'salary' => $request->salary,
-            'company_id' => $companyId,
-            'category_id' => $request->category
+            'expired_at'    => $request->expired_at,
+            'salary'        => $request->salary,
+            'company_id'    => $companyId,
+            'category_id'   => $request->category,
         ]);
     }
 }
@@ -114,5 +114,45 @@ if (!function_exists('indexJobCategory')) {
     function indexJobCategory()
     {
         return JobCategory::where('is_deleted', false)->get();
+    }
+}
+
+if (!function_exists('searchJobFromDB')) {
+    function searchJobFromDB($query, $options = [])
+    {
+        $internalOnly       = $options['internalOnly'] ?? null;
+        $withApplicant      = $options['withApplicant'] ?? false;
+        $includeExpiredJobs = $options['includeExpiredJobs'] ?? false;
+
+        $jobs = Job::where('position', 'like', "%$query%");
+        if ($internalOnly) {
+            $companyId = Recruiter::where('user_id', Auth::id())
+                ->first()->company_id;
+            $jobs->where('company_id', $companyId);
+        } else {
+            $jobs = $jobs->orWhereHas('company', function ($q) use ($query) {
+                $q->where('name', 'like', "%$query%");
+            });
+            $jobs = $jobs->with('company');
+        }
+        if ($withApplicant) {
+            $jobs = $jobs->withCount('applicants');
+        }
+        if (!$includeExpiredJobs) {
+            $jobs = $jobs->whereDate('expired_at', '>=', date('Y-m-d'));
+        }
+        return $jobs->get();
+    }
+}
+
+if (!function_exists('showJob')) {
+    function showJob($id, $internalOnly)
+    {
+        $job = Job::where('id', $id);
+        if ($internalOnly) {
+            $companyId = Recruiter::where('user_id', Auth::id())->first()->company_id;
+            $job = $job->where('company_id', $companyId);
+        }
+        return $job->firstOrFail();
     }
 }

@@ -88,4 +88,20 @@ class RecruiterController extends Controller
         Auth::logout();
         return redirect('/');
     }
+
+    public function searchJob(Request $request)
+    {
+        $validation = Validator::make($request->all(), [
+            'q' => 'required'
+        ]);
+        if ($validation->fails()) {
+            return redirect('/recruiter/dashboard');
+        }
+
+        $options = [
+            'internalOnly' => true
+        ];
+        $jobs = searchJobFromDB($request->q, $options);
+        return response()->json($jobs);
+    }
 }
