@@ -11,9 +11,9 @@ class Job extends Model
     protected $fillable = [
     	'position',
     	'summary',
-    	'employment_type',
+    	'type',
     	'min_education',
-    	'expire_date',
+    	'expired_at',
     	'salary',
     	'company_id',
     	'category_id',
@@ -25,11 +25,15 @@ class Job extends Model
     	'updated_at'
     ];
 
-    protected function company() {
+    public function company() {
     	return $this->hasOne('App\Company');
     }
 
-    protected function category() {
+    public function category() {
     	return $this->hasOne('App\JobCategory', 'category_id');
+    }
+
+    public function applicants() {
+        return $this->hasMany('App\JobApplication');
     }
 }

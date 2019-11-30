@@ -57,8 +57,8 @@ class RecruiterController extends Controller
 
     public function showDashboard(Request $request)
     {
-        $user = Auth::user();
-        return response()->json($user);
+        $jobs = indexJob(['withApplicant' => true]);
+        return response()->json($jobs);
     }
 
     public function login(Request $request)
@@ -83,8 +83,9 @@ class RecruiterController extends Controller
         return redirect('/recruiter/dashboard');
     }
 
-    public function logout(Request $request) {
-    	Auth::logout();
-    	return redirect('/');
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        return redirect('/');
     }
 }

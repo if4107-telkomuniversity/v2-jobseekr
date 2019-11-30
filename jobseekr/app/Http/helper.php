@@ -1,7 +1,9 @@
 <?php
 
 use App\Company;
+use App\Job;
 use App\Jobseeker;
+use App\JobCategory;
 use App\Recruiter;
 use App\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -70,5 +72,47 @@ if (!function_exists('authUser')) {
             return null;
         }
         return $user;
+    }
+}
+
+if (!function_exists('indexJob')) {
+    function indexJob($options = [])
+    {
+        $withCompany        = $options['withCompany'] ?? false;
+        $withApplicant      = $options['withApplicant'] ?? false;
+        $includeExpiredJobs = $options['includeExpiredJobs'] ?? false;
+
+        $query = Job::where('expired_at', '>=', date('Y-m-d'));
+        if ($withCompany) {
+            $query = $query->with('company');
+        }
+        if ($withApplicant) {
+            $query = $query->withCount('applicants');
+        }
+        return $query->get();
+    }
+}
+
+if (!function_exists('newJob')) {
+    function newJob($request)
+    {
+        $companyId = Recruiter::where('user_id', Auth::id())->first()->company_id;
+        return Job::create([
+            'position' => $request->position,
+            'summary' => $request->summary,
+            'type' => $request->type,
+            'min_education' => $request->min_education,
+            'expired_at' => $request->expired_at,
+            'salary' => $request->salary,
+            'company_id' => $companyId,
+            'category_id' => $request->category
+        ]);
+    }
+}
+
+if (!function_exists('indexJobCategory')) {
+    function indexJobCategory()
+    {
+        return JobCategory::where('is_deleted', false)->get();
     }
 }

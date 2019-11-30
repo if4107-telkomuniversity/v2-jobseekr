@@ -9,7 +9,7 @@ class JobApplication extends Model
     protected $table = 'job_application';
 
     protected $fillable = [
-    	'user_id'
+    	'user_id',
     	'job_id',
     	'summary',
     	'cv_id',
