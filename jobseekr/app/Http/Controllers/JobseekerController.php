@@ -2,37 +2,36 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Transformers\ProfileTransformer;
 use Auth;
-use Validator;
-use Illuminate\Database\QueryException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rule;
-use App\User;
-use App\Jobseeker;
-use App\Http\Transformers\ProfileTransformer;
+use Validator;
 
 class JobseekerController extends Controller
 {
     private $roleName = 'jobseeker';
 
-    public function __construct() {
-    	$this->middleware('login:jobseeker', [
-    		'except' => ['showAuthForm', 'register', 'login']
-		]);
+    public function __construct()
+    {
+        $this->middleware('login:jobseeker', [
+            'except' => ['showAuthForm', 'register', 'login'],
+        ]);
     }
 
-    public function showAuthForm(Request $request) {
-    	return view('test/jobseeker/auth');
+    public function showAuthForm(Request $request)
+    {
+        return view('test/jobseeker/auth');
     }
 
-    public function register(Request $request) {
-    	$validation = Validator::make($request->all(), [
-            'name' => 'required|string|max:50',
-            'email' => 'required|email|unique:user,email,NULL,id,role,jobseeker',
-            'password' => 'required|min:8|confirmed'
+    public function register(Request $request)
+    {
+        $validation = Validator::make($request->all(), [
+            'name'     => 'required|string|max:50',
+            'email'    => 'required|email|unique:user,email,NULL,id,role,jobseeker',
+            'password' => 'required|min:8|confirmed',
         ]);
         if ($validation->fails()) {
             return redirect()->back()
@@ -43,11 +42,11 @@ class JobseekerController extends Controller
             DB::beginTransaction();
             $user = registerUser($request, $this->roleName);
             DB::commit();
-        } catch(QueryException $e) {
+        } catch (QueryException $e) {
             DB::rollback();
             return redirect()->back()
                 ->withInput($request->all())->withErrors([
-                    'general' => "Failed to save data: $e"
+                'general' => "Failed to save data: $e",
             ]);
         }
 
@@ -55,7 +54,8 @@ class JobseekerController extends Controller
         return redirect('/dashboard');
     }
 
-    public function showDashboard(Request $request) {
+    public function showDashboard(Request $request)
+    {
         $jobs = indexJob(['withCompany' => true]);
         return response()->json($jobs);
     }
@@ -82,12 +82,14 @@ class JobseekerController extends Controller
         return redirect('/recruiter/dashboard');
     }
 
-    public function logout(Request $request) {
+    public function logout(Request $request)
+    {
         Auth::logout();
         return redirect('/');
     }
 
-    public function showJobDetail(Request $request, $id) {
+    public function showJobDetail(Request $request, $id)
+    {
         try {
             $job = showJob($id);
         } catch (ModelNotFoundException $e) {
@@ -96,16 +98,12 @@ class JobseekerController extends Controller
         return response()->json($job);
     }
 
-    public function showProfileForm(Request $request) {
-        $user = getLoggedinUser();
-        $userDetail = getUserDetail($user->id, $user->role);
+    public function showProfileForm(Request $request)
+    {
+        $user            = getLoggedinUser();
+        $userDetail      = getUserDetail($user->id, $user->role);
         $workExperiences = getWorkExperience($user->id);
-        $data = ProfileTransformer::transformJobseeker($user, $userDetail, $workExperiences);
-        // $data = [
-        //     'user' => $user,
-        //     'userDetail' => $userDetail,
-        //     'workExperiences' => $workExperiences
-        // ];
+        $data            = ProfileTransformer::jobseeker($user, $userDetail, $workExperiences);
         return response()->json($data);
     }
 }

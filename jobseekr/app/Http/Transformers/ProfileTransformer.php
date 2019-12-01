@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Collection;
 
 class ProfileTransformer
 {
-	public static function transformJobseeker(User $user, Jobseeker $jobseeker, Collection $experiences)
+	public static function jobseeker(User $user, Jobseeker $jobseeker, Collection $experiences)
 	{
 
 		return [
