@@ -94,4 +94,16 @@ class JobseekerController extends Controller
         }
         return response()->json($job);
     }
+
+    public function showProfileForm(Request $request) {
+        $user = getLoggedinUser();
+        $userDetail = getUserDetail($user->id, $user->role);
+        $workExperiences = getWorkExperience($user->id);
+        $data = [
+            'user' => $user,
+            'userDetail' => $userDetail,
+            'workExperiences' => $workExperiences
+        ];
+        return response()->json($data);
+    }
 }

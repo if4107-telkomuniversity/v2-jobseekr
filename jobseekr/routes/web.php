@@ -10,6 +10,15 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+use App\User;
+
+Route::get('check', function(Request $request) {
+    dd(Auth::user());
+});
+Route::get('logout', function (Request $request) {
+    Auth::logout();
+});
 Route::prefix('auth')->group(function() {
     Route::get('', 'JobseekerController@showAuthForm')->name('authJobseeker');
     Route::post('login' , 'JobseekerController@login');
@@ -24,7 +33,10 @@ Route::prefix('profile')->group(function() {
 
 Route::get('dashboard', 'JobseekerController@showDashboard');
 Route::put('summary', 'JobseekerController@updateSummary');
-Route::put('experience', 'JobController@updateWorkExperience');
+Route::prefix('experience')->group(function() {
+    Route::post('', 'WorkExperienceController@store');
+    Route::put('', 'WorkExperienceController@update');
+});
 Route::put('document/{document}', 'JobController@updateDocument');
 Route::get('application', 'JobseekerController@showApplication');
 

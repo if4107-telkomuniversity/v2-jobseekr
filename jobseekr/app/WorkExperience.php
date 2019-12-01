@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class WorkExperience extends Model
 {
@@ -31,7 +32,20 @@ class WorkExperience extends Model
    		return $this->hasOne('App\Company');
    	}
 
-   	public function duration() {
-   		return date_diff($this->start_date, $this->end_date);
+   	public function getDurationAttribute() {
+      $startDate = Carbon::parse($this->start_date);
+      $endDate = Carbon::parse($this->end_date);
+   		$dateDiff = $startDate->diff($endDate);
+      return $dateDiff->format('%y year(s) %m month(s)');
    	}
+
+    public function getStartDateAttribute() {
+      return Carbon::parse($this->attributes['start_date'])->format('Y-m');
+    }
+
+    public function getEndDateAttribute() {
+      return Carbon::parse($this->attributes['end_date'])->format('Y-m');
+    }
+
+    protected $appends = ['duration'];
 }

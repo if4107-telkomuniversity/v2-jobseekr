@@ -37,17 +37,13 @@ class User extends Authenticatable
 
     public function detail()
     {
-        if ($this->role == 'recruiter') {
-            return $this->hasOne('App\Recruiter', 'user_id');
+        switch ($this->hasOne('App\Jobseeker', 'user_id')->toSql()) {
+            case 'jobseeker':
+                return $this->hasOne('App\Jobseeker', 'user_id');
+            case 'recruiter':
+                return $this->hasOne('App\Recruiter', 'user_id');
+            default:
+                return null;
         }
-        // $this = $this->find($id);
-        // switch ($this->role) {
-        //     case 'jobseeker':
-        //         return $this->belongsTo('App\Jobseeker', 'user_id');
-        //     case 'recruiter':
-        //         return $this->hasOne('App\Recruiter', 'user_id');
-        //     default:
-        //         return null;
-        // }
     }
 }

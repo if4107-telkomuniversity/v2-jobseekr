@@ -6,6 +6,8 @@ use App\JobCategory;
 use App\Jobseeker;
 use App\Recruiter;
 use App\User;
+use App\WorkExperience;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 if (!function_exists('newBasicUser')) {
@@ -164,5 +166,49 @@ if (!function_exists('showJob')) {
             $job = $job->with('company');
         }
         return $job->firstOrFail();
+    }
+}
+
+if (!function_exists('getLoggedinUser')) {
+    function getLoggedinUser()
+    {
+        $user = Auth::user();
+        return $user;
+    }
+}
+
+if (!function_exists('getUserDetail')) {
+    function getUserDetail($userId, $role)
+    {
+        switch ($role) {
+            case 'jobseeker':
+                return Jobseeker::where('user_id', $userId)->first();
+            case 'recruiter':
+                return Recruiter::where('user_id', $userId)->first();
+        }
+    }
+}
+
+if (!function_exists('getWorkExperience')) {
+    function getWorkExperience($userId)
+    {
+        return WorkExperience::where('user_id', $userId)->get();
+    }
+}
+
+
+if (!function_exists('addWorkExperience')) {
+    function addWorkExperience($request)
+    {
+        $user = Auth::user();
+
+        $workExperience = WorkExperience::create([
+            'user_id' => $user->id,
+            'company_name' => $request->company_name,
+            'position' => $request->position,
+            'start_date' => Carbon::parse($request->start_date),
+            'end_date' => Carbon::parse($request->end_date),
+        ]);
+        return $workExperience;
     }
 }
