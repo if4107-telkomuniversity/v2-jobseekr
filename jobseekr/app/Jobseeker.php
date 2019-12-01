@@ -8,7 +8,7 @@ class Jobseeker extends Model
 {
     protected $table = 'jobseeker';
 
-    protected $fillable = ['address', 'summary', 'user_id'];
+    protected $fillable = ['address', 'summary', 'user_id', 'img_url'];
 
     protected $hidden = ['created_at', 'updated_at'];
 
