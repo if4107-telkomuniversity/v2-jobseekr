@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Transformers\ProfileTransformer;
 use Auth;
+use App\Http\Transformers\ProfileTransformer;
+use App\Http\Transformers\JobTransformer;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
@@ -104,6 +105,22 @@ class JobseekerController extends Controller
         $userDetail      = getUserDetail($user->id, $user->role);
         $workExperiences = getWorkExperience($user->id);
         $data            = ProfileTransformer::jobseeker($user, $userDetail, $workExperiences);
+        return response()->json($data);
+    }
+
+    public function showApplicationForm(Request $request, $id)
+    {
+        $validation = Validator::make(['jobId' => $id], [
+            'jobId' => 'exists:job,id'
+        ]);
+        if ($validation->fails()) {
+            return redirect('/dashboard')->withErrors($validation);
+        }
+
+        $user            = getLoggedinUser();
+        $userDetail      = getUserDetail($user->id, $user->role);
+        $workExperiences = getWorkExperience($user->id);
+        $data            = JobTransformer::apply($user, $userDetail, $workExperiences, $id);
         return response()->json($data);
     }
 }
