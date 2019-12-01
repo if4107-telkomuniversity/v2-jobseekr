@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 use App\User;
 use App\Jobseeker;
+use App\Http\Transformers\ProfileTransformer;
 
 class JobseekerController extends Controller
 {
@@ -99,11 +100,12 @@ class JobseekerController extends Controller
         $user = getLoggedinUser();
         $userDetail = getUserDetail($user->id, $user->role);
         $workExperiences = getWorkExperience($user->id);
-        $data = [
-            'user' => $user,
-            'userDetail' => $userDetail,
-            'workExperiences' => $workExperiences
-        ];
+        $data = ProfileTransformer::transformJobseeker($user, $userDetail, $workExperiences);
+        // $data = [
+        //     'user' => $user,
+        //     'userDetail' => $userDetail,
+        //     'workExperiences' => $workExperiences
+        // ];
         return response()->json($data);
     }
 }

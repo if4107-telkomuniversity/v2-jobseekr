@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Transformers\WorkExperienceTransformer;
 
 class WorkExperienceController extends Controller
 {
@@ -38,9 +39,10 @@ class WorkExperienceController extends Controller
                     'general' => "Failed to save data: $e"
             ]);
         }
-        $data = [
-        	'workExperiences' => $workExperiences
-        ];
+        $data = WorkExperienceTransformer::array($workExperiences);
+        // $data = [
+        // 	'workExperiences' => $workExperiences
+        // ];
         return response()->json($data);
     }
 }
