@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard | JobSeekr</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
+  <link rel="stylesheet" href="css/app.css">
+  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+  <!-- <script defer src="js/job.js"></script>
+    <script defer src="js/auth.js"></script> -->
+</head>
+
+<body onload="callFunctions()">
+  <nav class="white-background custom-nav" role="navigation" aria-label="main navigation">
+    <div class="columns">
+      <div class="column is-4 navbar-left">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="https://bulma.io">
+            <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+          </a>
+
+          <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
+            data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
+      </div>
+      <div class="column is-5 navbar-center">
+        <div class="field has-addons">
+        </div>
+      </div>
+      <div class="column is-2">
+        <div class="navbar-item has-dropdown is-hoverable is-pulled-right">
+          <a class="navbar-link jobseeker-name">
+            {Username}
+          </a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="jobseeker-profile.html">
+              <span class="icon is-small is-left">
+                <i class="fas fa-user-cog"></i>
+              </span>
+              &nbsp&nbsp Profile
+            </a>
+            <a class="navbar-item" href="report-an-issue.html">
+              <span class="icon is-small is-left">
+                <i class="fas fa-bug"></i>
+              </span>
+              &nbsp&nbsp Report an issue
+            </a>
+            <hr class="navbar-divider">
+            <a class="navbar-item" onClick="signout()">
+              <span class="icon is-small is-left">
+                <i class="fas fa-sign-out-alt"></i>
+              </span>
+              &nbsp&nbsp Signout
+            </a>
+          </div>
+        </div>
+        <div class="column is-1">
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="columns">
+    <div class="column is-2 side-menu">
+      <aside class="menu white-background">
+        <ul class="menu-list">
+          <li><a href="recruiter-dashboard.html" class="subtitle is-4">Jobs</a></li>
+          <li><a class="subtitle is-4">Post Job</a></li>
+        </ul>
+      </aside>
+    </div>
+    <div class="column is-10">
+      <div class="columns">
+        <div class="column is-4">
+        </div>
+        <div class="column is-8 jobs-content">
+
+
+          <div class="columns">
+            <div class="column is-8">
+              <h6 class="title is-4">Job you've posted</h6>
+            </div>
+            <div class="column is-4">
+              <div class="control is-pulled-right">
+                <div class="select">
+                  <select>
+                    <option selected>Sort by name: A - Z</option>
+                    <option>Sort by name: Z - A</option>
+                    <option>Sort by location: A - Z</option>
+                    <option>Sort by location: Z - A</option>
+                    <option>Sort by category: A - Z</option>
+                    <option>Sort by category: Z - A</option>
+                    <option>Sort by education: lowest to highest</option>
+                    <option>Sort by salary: lowest to highest</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="box" id="job-list">
+            <article class="media" onclick="seeJob(` + job.id + `)">
+              <figure class="media-left">
+                <p class="image is-64x64">
+                  <img src="https://bulma.io/images/placeholders/128x128.png">
+                </p>
+              </figure>
+              <div class="media-content">
+                <div class="content">
+                  <p>
+                    <strong> {{job.position}} ({{job.type}})</strong> <br />
+                    {{job.company.name}} <br />
+                    {{job.city}}, Indonesia | IDR. {{job.salary}}<br />
+                    <small class="is-pulled-right">Until {{date_expire}} </small>
+                  </p>
+                </div>
+              </div>
+            </article>
+          </div>
+          <nav class="pagination" role="navigation" aria-label="pagination">
+            <a class="pagination-previous  has-background-white has-text-black">Previous</a>
+            <a class="pagination-next  has-background-white has-text-black">Next page</a>
+            <ul class="pagination-list">
+              <li>
+                <a class="pagination-link  has-background-white has-text-black" aria-label="Goto page 1"
+                  id="first-page">1</a>
+              </li>
+              <li>
+                <span class="pagination-ellipsis  has-background-white has-text-black">…</span>
+              </li>
+              <li>
+                <a class="pagination-link  has-background-white has-text-black" aria-label="Goto page 14">14</a>
+              </li>
+              <li>
+                <a class="pagination-link is-current" aria-label="Page 15" aria-current="page">15</a>
+              </li>
+              <li>
+                <a class="pagination-link  has-background-white has-text-black" aria-label="Goto page 16">16</a>
+              </li>
+              <li>
+                <span class="pagination-ellipsis  has-background-white has-text-black">…</span>
+              </li>
+              <li>
+                <a class="pagination-link  has-background-white has-text-black" aria-label="Goto page 30"
+                  id="last-page">30</a>
+              </li>
+            </ul>
+          </nav>
+        
+        <div class="column">
+        </div>
+      </div>
+    </div>
+</body>
+<script>
+  function seeJob(jobId) {
+    sessionStorage.setItem('jobId', parseFloat(jobId));
+    window.location = 'recruiter-job-detail.html';
+  }
+
+  function recruiterJobSearch() {
+    var data = new FormData();
+    data.append('name', document.getElementById("job-search-input").value);
+    var params = {
+      name: document.getElementById("job-search-input").value
+    }
+    var param = formatParams(params)
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'http://localhost:3103/job/search' + param, false);
+    xhr.send(data);
+    var jobs = JSON.parse(xhr.response);
+    document.getElementById('job-list').innerHTML = '';
+    jobs.forEach(viewAppliedPeople);
+  }
+
+  function loadAppliedPeople() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'http://localhost:3103/job/all', false);
+    xhr.send();
+    var allJobs = JSON.parse(xhr.response);
+    document.getElementById('job-list').innerHTML = '';
+    allJobs.forEach(viewAppliedPeople);
+  }
+
+  function checkAuth() {
+    if (sessionStorage.getItem('email')) {
+      //do something
+    } else {
+      window.location = 'index.html';
+    }
+  }
+
+  function signout() {
+    sessionStorage.clear();
+    window.location = 'index.html';
+  }
+
+  function callFunctions() {
+    loadAppliedPeople();
+    checkAuth();
+  }
+</script>
+
+</html>
