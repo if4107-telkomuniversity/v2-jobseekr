@@ -106,48 +106,80 @@
           <h1 class="title is-3 push-right-a-bit">Applications</h1>
           <div class="column is-10">
             <div class="box" id="job-list">
-              <article class="media">
-                <figure class="media-left">
-                  <p class="image is-64x64">
-                    <img
-                      src="https://bulma.io/images/placeholders/128x128.png"
-                    />
-                  </p>
-                </figure>
-                <div class="media-content">
-                  <div class="content">
-                    <p>
-                      <strong> {{job.name}} ({{employment.type}})</strong> <br />
-                      {{company.name}}<br />
-                      {{acceptence.status}}<br />
-                    </p>
-                    <small class="is-pulled-right"
-                        >Applied on {{date_applied}}
-                      </small>
-                  </div>
-                </div>
-              </article>
-              <article class="media">
-                <figure class="media-left">
-                  <p class="image is-64x64">
-                    <img
-                      src="https://bulma.io/images/placeholders/128x128.png"
-                    />
-                  </p>
-                </figure>
-                <div class="media-content">
-                  <div class="content">
-                    <p>
-                      <strong> Backend Engineer (Part Time)</strong> <br />
-                      Proofn<br />
-                      Accepted<br />
-                    </p>
-                    <small class="is-pulled-right"
-                        >Applied on Nov 29 2019
-                      </small>
-                  </div>
-                </div>
-              </article>
+              <script>
+                var jsonData = [
+                                  {
+                                    "id" : 0,
+                                    "pic" : "https://bulma.io/images/placeholders/128x128.png",
+                                    "jobName" : "Backend Engineer",
+                                    "employmentType" : "Part Time",
+                                    "company" : "Proofn",
+                                    "status" : "Accepted",
+                                    "date" : "Nov 29 2019"
+                                  },
+                                  {
+                                    "id" : 1,
+                                    "pic" : "https://bulma.io/images/placeholders/128x128.png",
+                                    "jobName" : "Frontend Engineer",
+                                    "employmentType" : "Full Time",
+                                    "company" : "Google",
+                                    "status" : "Declined",
+                                    "date" : "Nov 28 2019"
+                                  },
+                                  {
+                                    "id" : 2,
+                                    "pic" : "https://bulma.io/images/placeholders/128x128.png",
+                                    "jobName" : "Data Engineer",
+                                    "employmentType" : "Full Time",
+                                    "company" : "Tokopedia",
+                                    "status" : "Accepted",
+                                    "date" : "Oct 1 2019"
+                                  }
+                              ];
+                  viewApplication();
+                  function viewApplication(){
+                    for (i in jsonData){
+                      document.querySelector("#job-list").innerHTML +=
+                        `<article class="media" data-id="`+jsonData[i].id+`"">
+                          <figure class="media-left">
+                            <p class="image is-64x64">
+                              <img
+                                src="`+jsonData[i].pic+`"
+                              />
+                            </p>
+                          </figure>
+                          <div class="media-content">
+                            <div class="content">
+                              <p>
+                                <strong>`+ jsonData[i].jobName +`(`+jsonData[i].employmentType+`)</strong> <br />
+                                `+jsonData[i].company+`<br />
+                                `+jsonData[i].status+`<br />
+                              </p>
+                              <small class="is-pulled-right"
+                                  >Applied on `+jsonData[i].date+`
+                                </small>
+                            </div>
+                          </div>
+                          <button class="button is-info is-small" onclick="delAapplication(\``+jsonData[i].id+`\`)"
+                            style="border-color : grey; color: grey; background-color:white; text-align:center;">Cancel</button>
+                        </article>`
+                    };
+                  }
+                  function getIdx(id){
+                    var i = 0;
+                    while (i < jsonData.length){
+                      if (jsonData[i].id == id) return i;
+                      i++;
+                    }
+                  }
+
+                  function delAapplication(id){
+                    document.querySelector(".media[data-id='"+id+"']").parentNode.removeChild(
+                      document.querySelector(".media[data-id='"+id+"']")
+                    );
+                    jsonData.splice(getIdx(id),1);
+                  }
+              </script>
             </div>
             <nav class="pagination" role="navigation" aria-label="pagination">
                 <a class="pagination-previous  has-background-white has-text-black">Previous</a>
