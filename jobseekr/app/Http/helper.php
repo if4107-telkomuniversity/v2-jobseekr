@@ -1,14 +1,20 @@
 <?php
 
 use App\Company;
+use App\Cv;
 use App\Job;
+use App\JobApplication;
 use App\JobCategory;
 use App\Jobseeker;
 use App\Recruiter;
+use App\Resume;
+use App\SubmittedExperience;
 use App\User;
 use App\WorkExperience;
 use Carbon\Carbon;
+use App\Http\Transformers\SubmittedExperienceTransformer;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Storage;
 
 if (!function_exists('newBasicUser')) {
     function newBasicUser($request, $type)
@@ -198,10 +204,9 @@ if (!function_exists('getWorkExperience')) {
 
 
 if (!function_exists('addWorkExperience')) {
-    function addWorkExperience($request)
+    function addWorkExperience($request, $options=[])
     {
-        $user = Auth::user();
-
+        $user = $options['user'] ?? Auth::user();
         $workExperience = WorkExperience::create([
             'user_id' => $user->id,
             'company_name' => $request->company_name,
@@ -210,5 +215,98 @@ if (!function_exists('addWorkExperience')) {
             'end_date' => Carbon::parse($request->end_date),
         ]);
         return $workExperience;
+    }
+}
+
+if (!function_exists('validateExperiences')) {
+    function validateExperiences($experienceIds, $options = [])
+    {
+        $user = $options['user'] ?? Auth::user();
+        return count($experienceIds) == WorkExperience::
+            whereIn('id', $experienceIds)->where('user_id', $user->id)
+            ->count();
+    }
+}
+
+if (!function_exists('validateJob')) {
+    function validateJob($id, $options = [])
+    {
+        $user = $options['user'] ?? Auth::user();
+        return Job::where('id', $id)->where('expired_at', '>=', now())->exists();
+    }
+}
+
+if (!function_exists('saveCv')) {
+    function saveCv($file, $jobId, $options = [])
+    {
+        $user = $options['user'] ?? Auth::user();
+        
+        $fileName = sprintf('%s_%s_%s.%s', 
+            $user->id,
+            $jobId,
+            date('Y-m-d_h-i-s'),
+            $file->getClientOriginalExtension());
+        $cv = Cv::create([
+            'user_id' => $user->id,
+            'title' => $file->getClientOriginalName(),
+            'file_name' => $fileName
+        ]);
+        $file->storeAs($cv->path, $fileName);
+        return $cv;
+    }
+}
+
+if (!function_exists('arrStringToArr')) {
+    function arrStringToArr($arrString)
+    {
+        $str = substr($arrString, 1, strlen($arrString) - 2);
+        return explode(',', $str);
+    }
+}
+
+if (!function_exists('saveResume')) {
+    function saveResume($file, $jobId, $options = [])
+    {
+        $user = $options['user'] ?? Auth::user();
+        
+        $fileName = sprintf('%s_%s_%s.%s', 
+            $user->id,
+            $jobId,
+            date('Y-m-d_h-i-s'),
+            $file->getClientOriginalExtension());
+        $resume = Resume::create([
+            'user_id' => $user->id,
+            'title' => $file->getClientOriginalName(),
+            'file_name' => $fileName
+        ]);
+        $file->storeAs($resume->path, $fileName);
+        return $resume;
+    }
+}
+
+if (!function_exists('submitApplication')) {
+    function submitApplication($jobId, $request, $options)
+    {
+        $user = $options['user'] ?? Auth::user();
+
+        $cv = saveCv($request->file('cv'), $jobId, $options);
+        $resume = saveResume($request->file('resume'), $jobId, $options);
+        $experienceIds = arrStringToArr($request->experiences);
+
+        $jobApplication = JobApplication::create([
+            'user_id' => $user->id,
+            'job_id' => $jobId,
+            'summary' => $request->summary,
+            'cv_id' => $cv->id,
+            'resume_id' => $resume->id
+        ]);
+        
+        $submittedExperiencesArr = SubmittedExperienceTransformer::prepareBulkInsertion(
+            $experienceIds,
+            $jobApplication->id
+        );
+        $submittedExperiences = SubmittedExperience::insert($submittedExperiencesArr);
+
+        return $jobApplication;
     }
 }

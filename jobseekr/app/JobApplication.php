@@ -35,4 +35,8 @@ class JobApplication extends Model
     public function resume() {
     	return $this->hasOne('App\Resume');
     }
+
+    public function experiences() {
+        return $this->hasMany('App\SubmittedExperiences', 'job_application_id');
+    }
 }

@@ -8,6 +8,8 @@ class Resume extends Model
 {
     protected $table = 'resume';
 
+    public $path = '/public/docs/resume/';
+
     protected $fillable = [
     	'user_id',
     	'title',

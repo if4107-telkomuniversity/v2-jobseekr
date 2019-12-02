@@ -123,4 +123,43 @@ class JobseekerController extends Controller
         $data            = JobTransformer::apply($user, $userDetail, $workExperiences, $id);
         return response()->json($data);
     }
+
+    public function applyJob(Request $request, $id)
+    {
+        $validation = Validator::make($request->all(), [
+            'summary' => 'required|string|max:200',
+            'experiences' => 'required',
+            'cv' => 'required|mimes:pdf|max:2048',
+            'resume' => 'required|mimes:pdf|max:2048'
+        ]);
+        if ($validation->fails()) {
+            return redirect()->back()
+                ->withInput($request->all())->withErrors($validation);
+        }
+        $experiences = arrStringToArr($request->experiences);
+        if (! validateExperiences($experiences)) {
+            return redirect()->back()
+                ->withInput($request->all())->withErrors([
+                    'experiences' => 'Invalid work experience'
+                ]);
+        }
+        if (! validateJob($id)) {
+            return redirect()->back()
+                ->withInput($request->all())->withErrors([
+                    'job' => 'Job is unavailable'
+                ]);
+        }
+
+        $options = ['user' => getLoggedinUser()];
+        try {
+            DB::beginTransaction();
+            $jobApplication = submitApplication($id, $request, $options);
+            DB::commit();
+        } catch (QueryException $e) {
+            DB::rollback();
+            return response()->json($e);
+        }
+        return response()->json($jobApplication);
+
+    }
 }
