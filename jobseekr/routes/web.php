@@ -19,6 +19,7 @@ Route::get('check', function(Request $request) {
 Route::get('logout', function (Request $request) {
     Auth::logout();
 });
+
 Route::prefix('auth')->group(function() {
     Route::get('', 'JobseekerController@showAuthForm')->name('authJobseeker');
     Route::post('login' , 'JobseekerController@login');
@@ -31,14 +32,10 @@ Route::prefix('profile')->group(function() {
     Route::put('about', 'JobseekerController@updateProfile');
 });
 
-Route::get('dashboard', 'JobseekerController@showDashboard');
-Route::put('summary', 'JobseekerController@updateSummary');
 Route::prefix('experience')->group(function() {
     Route::post('', 'WorkExperienceController@store');
     Route::put('', 'WorkExperienceController@update');
 });
-Route::put('document/{document}', 'JobController@updateDocument');
-Route::get('application', 'JobseekerController@showApplication');
 
 Route::prefix('job')->group(function() {
     Route::get('search', 'JobController@search');
@@ -46,6 +43,16 @@ Route::prefix('job')->group(function() {
     Route::get('{id}/apply', 'JobseekerController@showApplicationForm');
     Route::post('{id}/apply', 'JobseekerController@applyJob');
 });
+
+// Route::prefix('document')->group(function() {
+//     Route::post('', 'JobController@storeDocument');
+//     Route::put('{id}', 'JobController@updateDocument');
+// });
+
+Route::get('application', 'JobseekerController@showApplication');
+Route::get('dashboard', 'JobseekerController@showDashboard');
+Route::put('summary', 'JobseekerController@updateSummary');
+
 
 Route::prefix('recruiter')->group(function() {
     Route::prefix('auth')->group(function() {
@@ -68,7 +75,7 @@ Route::prefix('recruiter')->group(function() {
         Route::put('summary', 'CompanyController@updateSummaryCompany');
     });
 
-    Route::get('dashboard', 'RecruiterController@showDashboard');
-    Route::get('application/{id}/confirm', 'JobApplicationController@showJobseekerDetail');
     Route::post('applicant/confirm', 'JobApplicationController@confirmationJobseeker');
+    Route::get('application/{id}/confirm', 'JobApplicationController@showJobseekerDetail');
+    Route::get('dashboard', 'RecruiterController@showDashboard');
 });
