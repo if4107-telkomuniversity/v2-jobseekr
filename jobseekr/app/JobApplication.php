@@ -25,7 +25,7 @@ class JobApplication extends Model
     }
 
     public function job() {
-    	return $this->hasOne('App\Job');
+    	return $this->hasOne('App\Job', 'id');
     }
 
     public function cv() {

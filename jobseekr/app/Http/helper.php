@@ -310,3 +310,26 @@ if (!function_exists('submitApplication')) {
         return $jobApplication;
     }
 }
+
+if (!function_exists('getJobApplication')) {
+    function getJobApplication($id)
+    {
+        return JobApplication::findOrFail($id);
+    }
+}
+
+if (!function_exists('validateJobApplication')) {
+    function validateJobApplication($recruiter, $jobApplication)
+    {
+        return $recruiter->company_id == $jobApplication->job->company_id;
+    }
+}
+
+if (!function_exists('confirmJobApplication')) {
+    function confirmJobApplication($jobApplication, $isAccepted)
+    {
+        $jobApplication->is_accepted = true;
+        $jobApplication->save();
+        return $jobApplication;
+    }
+}

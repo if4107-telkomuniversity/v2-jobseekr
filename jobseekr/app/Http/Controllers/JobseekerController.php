@@ -159,7 +159,6 @@ class JobseekerController extends Controller
             DB::rollback();
             return response()->json($e);
         }
-        return response()->json($jobApplication);
-
+        return redirect('/dashboard');
     }
 }
