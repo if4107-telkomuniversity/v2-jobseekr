@@ -69,7 +69,7 @@
                 &nbsp&nbsp Report an issue
               </a>
               <hr class="navbar-divider">
-              <a class="navbar-item" onClick="signout()">
+              <a class="navbar-item" href="/logout">
                 <span class="icon is-small is-left">
                   <i class="fas fa-sign-out-alt"></i>
                 </span>
