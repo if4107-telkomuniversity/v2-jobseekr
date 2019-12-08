@@ -12,4 +12,8 @@ class SubmittedExperience extends Model
     	'job_application_id',
     	'job_experience_id'
     ];
+
+    public function object() {
+    	return $this->belongsTo('App\WorkExperience', 'job_application_id');
+    }
 }

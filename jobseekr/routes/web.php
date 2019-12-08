@@ -18,7 +18,10 @@ Route::get('check', function(Request $request) {
 });
 Route::get('logout', function (Request $request) {
     Auth::logout();
+    return redirect('/');
 });
+
+Route::get('', 'HomeController@welcome');
 
 Route::prefix('auth')->group(function() {
     Route::get('', 'JobseekerController@showAuthForm')->name('authJobseeker');
@@ -67,6 +70,7 @@ Route::prefix('recruiter')->group(function() {
         Route::get('new', 'JobController@create');
         Route::post('new', 'JobController@store');
         Route::get('{id}', 'JobController@showJobDetail');
+        Route::get('{id}/applicants', 'JobController@showApplicants');
     });
 
     Route::prefix('company')->group(function() {
@@ -75,7 +79,7 @@ Route::prefix('recruiter')->group(function() {
         Route::put('summary', 'CompanyController@updateSummaryCompany');
     });
 
-    Route::post('applicant/confirm', 'JobApplicationController@confirmationJobseeker');
-    Route::get('application/{id}/confirm', 'JobApplicationController@showJobseekerDetail');
+    Route::post('application/confirm', 'JobApplicationController@confirmationJobseeker');
+    Route::get('application/{id}', 'JobApplicationController@showJobseekerDetail');
     Route::get('dashboard', 'RecruiterController@showDashboard');
 });

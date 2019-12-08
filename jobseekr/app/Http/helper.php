@@ -105,7 +105,7 @@ if (!function_exists('indexJob')) {
         if ($withApplicant) {
             $job = $job->withCount('applicants');
         }
-        return $job->get();
+        return $job->paginate(8);
     }
 }
 
@@ -328,8 +328,28 @@ if (!function_exists('validateJobApplication')) {
 if (!function_exists('confirmJobApplication')) {
     function confirmJobApplication($jobApplication, $isAccepted)
     {
-        $jobApplication->is_accepted = true;
+        $jobApplication->is_accepted = boolval($isAccepted);
         $jobApplication->save();
         return $jobApplication;
+    }
+}
+
+if (!function_exists('indexApplicant')) {
+    function indexApplicant($jobId)
+    {
+        return JobApplication::where('job_id', $jobId)->where('is_accepted', null)->with('user')->paginate(8);
+    }
+}
+
+if (!function_exists('getApplication')) {
+    function getApplication($id)
+    {
+        return JobApplication::where('id', $id)->with('user')
+            ->with('user.jobseeker')
+            ->with('experiences')
+            ->with('experiences.object')
+            ->with('cv')
+            ->with('resume')
+            ->firstOrFail();
     }
 }

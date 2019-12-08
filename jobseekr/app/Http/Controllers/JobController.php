@@ -30,7 +30,7 @@ class JobController extends Controller
     	$data = [
     		'categories' => $categories
     	];
-    	return view('test/recruiter/job/create', $data);
+    	return view('recruiter/job/create', $data);
     }
 
     public function store(Request $request) {
@@ -44,7 +44,6 @@ class JobController extends Controller
 	    	'category' => 'required|exists:job_category,id',
         ]);
         if ($validation->fails()) {
-        	dd($validation);
         	return redirect()->back()
                 ->withInput($request->all())->withErrors($validation);
         }
@@ -70,7 +69,10 @@ class JobController extends Controller
     	} catch (ModelNotFoundException $e) {
     		return redirect('/recruiter/dashboard');
     	}
-    	return response()->json($job);
+        $data = [
+            'job' => $job
+        ];
+    	return view('recruiter/job/detail', $data);
     }
 
     public function search(Request $request) {
@@ -83,5 +85,13 @@ class JobController extends Controller
 
         $jobs = searchJobFromDB($request->q);
         return response()->json($jobs);
+    }
+
+    public function showApplicants(Request $request, $id) {
+        $applicants = indexApplicant($id);
+        $data = [
+            'applicants' => $applicants
+        ];
+        return view('recruiter/job/applicants', $data);
     }
 }

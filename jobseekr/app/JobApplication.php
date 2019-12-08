@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class JobApplication extends Model
 {
@@ -21,7 +22,7 @@ class JobApplication extends Model
     protected $hidden = ['updated_at'];
 
     public function user() {
-    	return $this->hasOne('App\User');
+    	return $this->belongsTo('App\User');
     }
 
     public function job() {
@@ -29,14 +30,21 @@ class JobApplication extends Model
     }
 
     public function cv() {
-    	return $this->hasOne('App\Cv');
+    	return $this->belongsTo('App\Cv');
     }
 
     public function resume() {
-    	return $this->hasOne('App\Resume');
+    	return $this->belongsTo('App\Resume');
     }
 
     public function experiences() {
-        return $this->hasMany('App\SubmittedExperiences', 'job_application_id');
+        return $this->hasMany('App\SubmittedExperience', 'job_application_id');
     }
+
+    protected function getApplyDateAttribute() {
+        $date = Carbon::parse($this->created_at);
+        return $date->format('d M Y g:i A');
+    }
+
+    protected $appends = ['apply_date'];
 }

@@ -37,7 +37,7 @@ class User extends Authenticatable
 
     public function detail()
     {
-        switch ($this->hasOne('App\Jobseeker', 'user_id')->toSql()) {
+        switch ($this->role) {
             case 'jobseeker':
                 return $this->hasOne('App\Jobseeker', 'user_id');
             case 'recruiter':
@@ -45,5 +45,15 @@ class User extends Authenticatable
             default:
                 return null;
         }
+    }
+
+    public function jobseeker()
+    {
+        return $this->hasOne('App\Jobseeker', 'user_id', 'id');
+    }
+
+    public function recruiter()
+    {
+        return $this->hasOne('App\Recruiter', 'user_id');
     }
 }

@@ -24,7 +24,7 @@ class RecruiterController extends Controller
         $data = [
             'companies' => indexCompany(),
         ];
-        return view('test/recruiter/auth', $data);
+        return view('recruiter/auth', $data);
     }
 
     public function register(Request $request)
@@ -33,6 +33,7 @@ class RecruiterController extends Controller
             'name'     => 'required|string|max:50',
             'email'    => 'required|email|unique:user,email,NULL,id,role,recruiter',
             'password' => 'required|min:8|confirmed',
+            'company' => 'required|exists:company,id'
         ]);
         if ($validation->fails()) {
             return redirect()->back()
@@ -61,7 +62,10 @@ class RecruiterController extends Controller
             'withApplicant' => true,
             'internalOnly' => true
         ]);
-        return response()->json($jobs);
+        $data = [
+            'jobs' => $jobs
+        ];
+        return view('recruiter/dashboard', $data);
     }
 
     public function login(Request $request)

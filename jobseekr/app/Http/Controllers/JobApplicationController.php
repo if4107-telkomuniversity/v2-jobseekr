@@ -21,7 +21,7 @@ class JobApplicationController extends Controller
     {
     	$validation = Validator::make($request->all(), [
             'job_application_id' => 'required|exists:job_application,id',
-            'is_accepted' => 'required|boolean'
+            'is_accepted' => 'required|in:1,0'
         ]);
         if ($validation->fails()) {
             return redirect()->back()->withErrors($validation);
@@ -51,6 +51,21 @@ class JobApplicationController extends Controller
         	]);
         }
         
-        return redirect('recruiter');
+        return redirect(sprintf('/recruiter/job/%s/applicants', $jobApplication->job_id));
+    }
+
+    public function showJobseekerDetail(Request $request, $id)
+    {
+        try {
+            $application = getApplication($id);
+            $applicant = getUserDetail($application->user->id, 'jobseeker');
+        } catch (ModelNotFoundException $e) {
+            return redirect()->back();
+        }
+        $data = [
+            'application' => $application,
+            'applicant' => $applicant
+        ];
+        return view('recruiter/job/application', $data);
     }
 }
