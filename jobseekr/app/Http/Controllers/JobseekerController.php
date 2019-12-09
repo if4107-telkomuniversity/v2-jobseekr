@@ -139,7 +139,6 @@ class JobseekerController extends Controller
             'resume' => 'required|mimes:pdf|max:2048'
         ]);
         if ($validation->fails()) {
-            dd($validation);
             return redirect()->back()
                 ->withInput($request->all())->withErrors($validation);
         }
@@ -164,10 +163,10 @@ class JobseekerController extends Controller
             DB::commit();
         } catch (QueryException $e) {
             DB::rollback();
-            // return redirect()->back()
-            //     ->withInput($request->all())->withErrors([
-            //         'apply' => "Failed to apply job"
-            //     ]);
+            return redirect()->back()
+                ->withInput($request->all())->withErrors([
+                    'apply' => "Failed to apply job"
+                ]);
         }
         $data = [
             'company_name' => $jobApplication->job->company->name
