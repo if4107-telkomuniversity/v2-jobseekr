@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
     <link rel="stylesheet" href="/css/app.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <!-- <script defer src="js/job.js"></script>
+    <script defer src="js/auth.js"></script> -->
   </head>
   <body onload="callFunctions()">
     <nav class="white-background custom-nav" role="navigation" aria-label="main navigation">
@@ -34,7 +36,7 @@
               {{Auth::user()->name}}
             </a>
             <div class="navbar-dropdown">
-              <a class="navbar-item" href="jobseeker-profile.html">
+              <a class="navbar-item" href="/profile">
                 <span class="icon is-small is-left">
                   <i class="fas fa-user-cog"></i>
                 </span>
@@ -47,7 +49,7 @@
                 &nbsp&nbsp Report an issue
               </a>
               <hr class="navbar-divider">
-              <a class="navbar-item" href="/logout">
+              <a class="navbar-item" onClick="signout()">
                 <span class="icon is-small is-left">
                   <i class="fas fa-sign-out-alt"></i>
                 </span>
@@ -158,7 +160,7 @@
             </div>
             <div class="box" id="job-list">
               @foreach ($jobs as $job)
-              <article class="media" onclick="window.location = '/recruiter/job/{{$job->id}}'">
+              <article class="media" onclick="window.location='/job/{{$job->id}}'">
                 <figure class="media-left">
                   <p class="image is-64x64">
                     <img src="https://bulma.io/images/placeholders/128x128.png">
@@ -177,8 +179,9 @@
               </article>
               @endforeach
             </div>
-
+            
             <?php $obj = $jobs ?>
             @include('pagination')
+            
           </body>
         </html>

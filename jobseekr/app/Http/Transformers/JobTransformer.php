@@ -17,7 +17,7 @@ class JobTransformer
 		    'phone' => $user->phone,
 		    'job_id' => $jobId,
 			'img_url' => $jobseeker->img_url,
-			'experience' => WorkExperienceTransformer::array($experiences)
+			'experiences' => WorkExperienceTransformer::array($experiences)
 		];
 		return $data;
 	}

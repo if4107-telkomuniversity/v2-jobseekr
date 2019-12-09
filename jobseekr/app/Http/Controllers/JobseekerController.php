@@ -24,7 +24,7 @@ class JobseekerController extends Controller
 
     public function showAuthForm(Request $request)
     {
-        return view('test/jobseeker/auth');
+        return view('jobseeker/auth');
     }
 
     public function register(Request $request)
@@ -58,7 +58,10 @@ class JobseekerController extends Controller
     public function showDashboard(Request $request)
     {
         $jobs = indexJob(['withCompany' => true]);
-        return response()->json($jobs);
+        $data = [
+            'jobs' => $jobs
+        ];
+        return view('jobseeker/dashboard', $data);
     }
 
     public function login(Request $request)
@@ -96,7 +99,10 @@ class JobseekerController extends Controller
         } catch (ModelNotFoundException $e) {
             return redirect('/dashboard');
         }
-        return response()->json($job);
+        $data = [
+            'job' => $job
+        ];
+        return view('jobseeker/job/detail', $data);
     }
 
     public function showProfileForm(Request $request)
@@ -121,7 +127,7 @@ class JobseekerController extends Controller
         $userDetail      = getUserDetail($user->id, $user->role);
         $workExperiences = getWorkExperience($user->id);
         $data            = JobTransformer::apply($user, $userDetail, $workExperiences, $id);
-        return response()->json($data);
+        return view('jobseeker/job/apply',$data);
     }
 
     public function applyJob(Request $request, $id)
@@ -133,6 +139,7 @@ class JobseekerController extends Controller
             'resume' => 'required|mimes:pdf|max:2048'
         ]);
         if ($validation->fails()) {
+            dd($validation);
             return redirect()->back()
                 ->withInput($request->all())->withErrors($validation);
         }
@@ -157,8 +164,14 @@ class JobseekerController extends Controller
             DB::commit();
         } catch (QueryException $e) {
             DB::rollback();
-            return response()->json($e);
+            // return redirect()->back()
+            //     ->withInput($request->all())->withErrors([
+            //         'apply' => "Failed to apply job"
+            //     ]);
         }
-        return redirect('/dashboard');
+        $data = [
+            'company_name' => $jobApplication->job->company->name
+        ];
+        return view('jobseeker/job/success', $data);
     }
 }
