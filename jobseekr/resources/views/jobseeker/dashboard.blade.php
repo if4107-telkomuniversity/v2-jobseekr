@@ -79,13 +79,14 @@
             <div class="box">
               <div class="columns">
                 <div class="column">
+                  <form action="job/search" method="GET">
                   <div class="field has-addons">
                     <div class="control is-expanded">
-                      <input id="job-search-input" class="input" type="text" placeholder="Search jobs">
+                      <input id="job-search-input" class="input" type="text" placeholder="Search jobs" name="q">
                     </div>
                     <div class="control">
-                      <a class="button is-info" onclick="recruiterJobSearch()">
-                        Search
+                      {{csrf_field()}}
+                      <input type="submit" class="button is-info" value="Search">
                       </a>
                     </div>
                   </div>

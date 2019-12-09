@@ -157,7 +157,7 @@ if (!function_exists('searchJobFromDB')) {
         if (!$includeExpiredJobs) {
             $jobs = $jobs->whereDate('expired_at', '>=', date('Y-m-d'));
         }
-        return $jobs->get();
+        return $jobs->paginate(8);
     }
 }
 

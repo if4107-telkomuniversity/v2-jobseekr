@@ -64,8 +64,8 @@
       <div class="column is-2 side-menu">
         <aside class="menu white-background">
           <ul class="menu-list">
-            <li><a href="recruiter-dashboard.html" class="subtitle is-4">Job</a></li>
-            <li><a href="/recruiter/job/new" class="subtitle is-4">Post Job</a></li>
+            <li><a href="/dashboard" class="subtitle is-4">Job</a></li>
+            <li><a href="#" class="subtitle is-4">Applications</a></li>
           </ul>
         </aside>
       </div>

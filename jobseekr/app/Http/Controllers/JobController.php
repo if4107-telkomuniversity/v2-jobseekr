@@ -84,7 +84,10 @@ class JobController extends Controller
         }
 
         $jobs = searchJobFromDB($request->q);
-        return response()->json($jobs);
+        $data = [
+            'jobs' => $jobs
+        ];
+        return view('jobseeker/dashboard', $data);
     }
 
     public function showApplicants(Request $request, $id) {
