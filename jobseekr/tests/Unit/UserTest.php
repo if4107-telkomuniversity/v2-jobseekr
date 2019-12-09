@@ -97,7 +97,7 @@ class UserTest extends TestCase
         $expected = [
             'id'         => 1,
             'name'       => 'I Gusti Bagus Vayupranaditya Putraadinatha',
-            'phone'      => null,
+            'phone'      => '081236629835',
             'email'      => 'vayu@vayu.id',
             'role'       => 'jobseeker',
             'is_deleted' => 0,

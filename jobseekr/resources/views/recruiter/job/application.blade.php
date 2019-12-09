@@ -13,10 +13,10 @@
     var jsonData = [
     @foreach ($application->experiences as $experience)
     {
-    "id" : "{{$experience->object->id}}",
-    "position" : "{{$experience->object->position}}",
-    "company" : "{{$experience->object->company_name}}",
-    "duration" : "{{$experience->object->duration}}",
+    "id" : "{{$experience->object['id']}}",
+    "position" : "{{$experience->object['position']}}",
+    "company" : "{{$experience->object['company_name']}}",
+    "duration" : "{{$experience->object['duration']}}",
     "pic" : "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973461_960_720.png"
     },
     @endforeach

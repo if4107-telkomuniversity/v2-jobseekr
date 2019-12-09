@@ -15,7 +15,7 @@ class ProfileTransformer
 			'name' => $user->name,
 		    'img_url' => $jobseeker->img_url,
 		    'phone' => $user->phone,
-		    'experience' => WorkExperienceTransformer::array($experiences)
+		    'experiences' => WorkExperienceTransformer::array($experiences)
 		];
 	}
 }

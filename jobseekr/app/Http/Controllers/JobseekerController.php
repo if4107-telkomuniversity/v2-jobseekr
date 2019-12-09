@@ -111,7 +111,7 @@ class JobseekerController extends Controller
         $userDetail      = getUserDetail($user->id, $user->role);
         $workExperiences = getWorkExperience($user->id);
         $data            = ProfileTransformer::jobseeker($user, $userDetail, $workExperiences);
-        return response()->json($data);
+        return view('jobseeker/profile', $data);
     }
 
     public function showApplicationForm(Request $request, $id)
