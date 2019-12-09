@@ -67,7 +67,7 @@
         <aside class="menu white-background">
           <ul class="menu-list">
             <li><a href="/dashboard" class="subtitle is-4">Job</a></li>
-            <li><a href="/application" class="subtitle is-4">Post Job</a></li>
+            <li><a href="/application" class="subtitle is-4">Applications</a></li>
           </ul>
         </aside>
       </div>
